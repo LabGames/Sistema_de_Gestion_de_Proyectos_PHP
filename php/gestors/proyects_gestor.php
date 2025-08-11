@@ -9,7 +9,7 @@
 <body>
     <header>
         <nav>
-            <ul>
+            <ul class="nav_title">
                 <li>
                     <a name="tittle">EMPRESA X</a>
                     <button name="tittle_button">Regresar</button>

@@ -9,18 +9,18 @@
 <body>
     <header>
         <nav>
-            <ul>
+            <ul class="nav_title">
                 <li>
-                    <a name="tittle">EMPRESA X</a>
-                    <button name="tittle_button">Regresar</button>
-                    <button name="tittle_button">Siguiente -></button>
+                    <a class="tittle">EMPRESA X</a>
+                    <button class="tittle_button">Regresar</button>
+                    <button class="tittle_button">Siguiente ></button>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
         <h1>GRAFICO CIRCULAR AQUI</h1>
-        <nav name="report_info">
+        <nav class="report_info">
             <ul>
                 <li>
                     <h3>Tipo de Proyectos:</h3>
@@ -35,7 +35,7 @@
             </ul>
         </nav>
         <h1>GRAFICO DE BARRAS AQUI</h1>
-        <nav name="report_stats">
+        <nav class="report_stats">
             <ul>
                 <li>
                     <h2>Proyectos por Realizar:</h2>
