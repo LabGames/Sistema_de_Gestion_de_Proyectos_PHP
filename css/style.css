@@ -182,7 +182,7 @@ footer nav a:hover {
 .registro-page {
   background: linear-gradient(
       rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.7)
+      rgb(0, 0, 0)
     ),
     url('../images/bg_1.jpg') center/cover no-repeat;
   display: flex;
