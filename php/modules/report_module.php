@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/style_report_module.css">
     <title>Modulo de Reportes</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
     </header>
     <main>
         <h1>GRAFICO CIRCULAR AQUI</h1>
-        <nav>
+        <nav name="report_info">
             <ul>
                 <li>
                     <h3>Tipo de Proyectos:</h3>
@@ -27,26 +28,24 @@
                     <a>Semi Importantes (10%) /</a>
                     <a>Secundarios (05%).</a>
                     <h3>Tiempo por Proyecto:</h3>
-                    <a>Proyecto 1: 7 meses / </a>
-                    <a>Proyecto 2: 2 meses / </a>
-                    <a>Proyecto 3: 1 año.</a>
-                    <h3>Productividad de los Colaboradores</h3>
-                    <a>Proyecto 1: Decente /</a>
-                    <a>Proyecto 2: Excelente /</a>
-                    <a>Proyecto 3: Mala.</a>
+                    <a>Promedio General: 3 meses - 7 meses</a>
+                    <h3>Productividad de los Colaboradores:</h3>
+                    <a>Promedio General: Excelente (25%) / Decente (10%) / Malo (03%)</a>
                 </li>
             </ul>
         </nav>
         <h1>GRAFICO DE BARRAS AQUI</h1>
-        <nav>
+        <nav name="report_stats">
             <ul>
                 <li>
-                    <h2>Tipo de Proyectos:</h2>
-                    <a>Importante</a>
-                    <h2>Tiempo por Proyecto:</h2>
-                    <a>7 meses</a>
-                    <h2>Productividad de los Colaboradores</h2>
-                    <a>Decente</a>
+                    <h2>Proyectos por Realizar:</h2>
+                    <a>22 aun a en espera.</a>
+                    <h2>Proyectos en Cursos:</h2>
+                    <a>5 aun en curso.</a>
+                    <h2>Proyectos Terminados:</h2>
+                    <a>7 proyectos concluidos.</a>
+                    <h2>Proyectos Totales:</h2>
+                    <a>34 proyectos en curso.</a>
                 </li>
             </ul>
         </nav>
