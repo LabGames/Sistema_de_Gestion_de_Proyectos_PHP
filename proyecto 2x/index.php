@@ -21,17 +21,17 @@
         <label for="nombre">Nombre de proyecto:</label>
         <input type="text" id="nombre" name="nombre" required>
       </div>
-      <div class="apellido">
+      <div class="tipo">
         <label for="apellido">tipo de proyecto:</label>
-        <input type="text" id="apellido" name="apellido" required>
+        <input type="text" id="tipo" name="tipo" required>
       </div>
-      <div class="email">
-        <label for="email">Cliente asociado:</label>
-        <input type="email" id="email" name="email" required>
+      <div class="cliente">
+        <label for="cliente">Cliente asociado:</label>
+        <input type="text" id="cliente" name="cliente" required>
       </div>
-      <div class="password">
-        <label for="password">Estado de proyecto:</label>
-        <input type="password" id="password" name="password" required>
+      <div class="estado">
+        <label for="estado">Estado de proyecto:</label>
+        <input type="text" id="estado" name="estado" required>
       </div>
       <div class="fecha">
         <label for="fecha">Fecha de inicio:</label>
@@ -49,7 +49,6 @@
         <label for="Time">Tiempo real:</label>
         <input type="text" id="Time" name="Time" required>
       </div>
-    </section>
     <button> Registrar </button>
   </from>
 </body>
