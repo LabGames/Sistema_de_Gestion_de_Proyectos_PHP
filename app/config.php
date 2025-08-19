@@ -11,4 +11,4 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-define("BASE_URL", "/GestionDeProyectosCRM1");
+define("BASE_URL", "/Sistema_de_Gestion_de_Proyectos_PHP");
