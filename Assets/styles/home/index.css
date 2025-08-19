@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Condensed+One&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Figtree", sans-serif;
+  background: linear-gradient(180deg, #0b0e1a, #0f1220 30%, #0f1220);
+  color: #e9ecf1;
+}
+
+.app-content {
+  margin-left: 260px;
+  padding: 20px;
+  min-height: calc(100vh - 110px - 56px);
+}
+#nav-toggle:checked ~ .app-content {
+  margin-left: 100px;
+}
