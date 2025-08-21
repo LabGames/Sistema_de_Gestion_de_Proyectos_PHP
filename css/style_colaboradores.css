@@ -1,0 +1,112 @@
+/* Estilos generales para el fondo y texto */
+body {
+    background-color: #1a1a2e;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal para centrar el contenido */
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos de la tarjeta (card) principal */
+.card {
+    background-color: #2a2a47;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 450px;
+    text-align: left;
+    margin-bottom: 20px;
+    border: 2px solid #5a5a7d;
+}
+
+/* Título de la tarjeta */
+.card-title {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+/* Información del proyecto asociado */
+.project-info {
+    font-size: 14px;
+    color: #b0b0b0;
+    margin-bottom: 20px;
+}
+
+/* Lista de colaboradores */
+.collaborator-list {
+    margin-bottom: 20px;
+}
+
+.collaborator-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3b3b5b;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.collaborator-name {
+    flex-grow: 1;
+}
+
+/* Botón principal "Añadir Colaboradores" */
+.btn-add-collaborator {
+    background: linear-gradient(to right, #ff6b6b, #f06292);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-add-collaborator:hover {
+    background: linear-gradient(to right, #f06292, #d83d6a);
+}
+
+/* Botón "Eliminar" */
+.btn-eliminar {
+    background: linear-gradient(to right, #ff6b6b, #f06292);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-eliminar:hover {
+    background: linear-gradient(to right, #f06292, #d83d6a);
+}
+
+/* Botón "Regresar" */
+.btn-regresar {
+    background-color: #4b4b6f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn-regresar:hover {
+    background-color: #3b3b5b;
+}

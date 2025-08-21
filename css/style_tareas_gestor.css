@@ -1,0 +1,100 @@
+body {
+    background-color: #1a1a2e;
+    font-family: Arial, sans-serif;
+    color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    background-color: #2a2a47;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.project-info {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #b0b0b0;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3b3b5b;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.task-name {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.btn-eliminar {
+    background: linear-gradient(to right, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-eliminar:hover {
+    background: linear-gradient(to right, #c0392b, #a03022);
+}
+
+.btn-nueva-tarea {
+    background: linear-gradient(to right, #ff6b6b, #f06292);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-nueva-tarea:hover {
+    background: linear-gradient(to right, #f06292, #d83d6a);
+}
+
+.btn-regresar {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-regresar:hover {
+    background-color: #666;
+}
