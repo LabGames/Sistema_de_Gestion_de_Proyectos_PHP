@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colaboradores</title>
-    <link rel="stylesheet" href="../../css/style_colaboradores.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/gestor_tareas/style_colaboradores.css">
 </head>
 <body>
     <div class="container">
