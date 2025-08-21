@@ -52,3 +52,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+async function register() {
+  const name = document.querySelector("input[name='name']").value.trim();
+  const email = document.querySelector("input[name='email']").value.trim();
+  const password = document
+    .querySelector("input[name='password']")
+    .value.trim();
+  const password_confirm = document
+    .querySelector("input[name='password_confirm']")
+    .value.trim();
+
+  if (!email || !password || !name || !password_confirm) {
+    return Swal.fire({
+      icon: "warning",
+      title: "Campos vacíos",
+      text: "Por favor completa todos los campos.",
+    });
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("password_confirm", password_confirm);
+
+    const response = await fetch(`${BASE_URL}/Registro/Crear`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      window.location.href = data.redirect;
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: data.error,
+      });
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Error del servidor",
+      text: "Intenta nuevamente más tarde.",
+    });
+  }
+}

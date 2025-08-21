@@ -10,15 +10,15 @@ class User
 
     public function findByEmail($email)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt = $this->pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create($name, $email, $password)
+    public function create($name, $email, $password, $rol)
     {
         $hash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-        return $stmt->execute([$name, $email, $hash]);
+        $stmt = $this->pdo->prepare("INSERT INTO usuarios (nombre, email, password, rol_id) VALUES (?, ?, ?, ?)");
+        return $stmt->execute([$name, $email, $hash, $rol]);
     }
 }

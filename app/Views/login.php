@@ -6,13 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empresa X</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+    <script src="<?= BASE_URL ?>/Assets/js/login.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
 </head>
 
 <body>
     <section class="login-page">
         <div class="login-glow"></div>
-        <form class="login-card" method="POST">
+        <form class="login-card">
             <header class="login-header">
                 <h1>Iniciar sesión</h1>
                 <p>Bienvenido(a). Ingresa tus credenciales.</p>
@@ -48,7 +54,7 @@
                 </label>
                 <a class="link" href="">¿Olvidaste tu contraseña?</a>
             </div>
-            <button class="btn-login" type="submit">
+            <button class="btn-login" type="button" onclick="login()">
                 <i class="fa-solid fa-right-to-bracket"></i>
                 <span>Entrar</span>
             </button>

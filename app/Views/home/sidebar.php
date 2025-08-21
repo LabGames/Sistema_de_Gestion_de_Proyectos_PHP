@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/home/sidebar.css">
 
+
 <input type="checkbox" id="nav-toggle" />
 
 <aside class="sidebar">
@@ -49,7 +50,7 @@
     </div>
 
     <div class="sidebar-footer">
-        <a href="<?= BASE_URL ?>/Logout" class="sidebar-menu-item">
+        <a onclick="logout()" class="sidebar-menu-item">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
             <span class="sidebar-text">Salir</span>
         </a>

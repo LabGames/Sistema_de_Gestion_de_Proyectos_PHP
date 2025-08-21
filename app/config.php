@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$dbname = "gestion_proyectos";
+$dbname = "sistema_gestion_proyectos";
 $user = "root";
 $pass = "";
 
