@@ -21,8 +21,6 @@ class AuthController
         include __DIR__ . "/../Views/home/index.php";
     }
 
-
-
     public function index_registro()
     {
         include __DIR__ . "/../Views/register.php";

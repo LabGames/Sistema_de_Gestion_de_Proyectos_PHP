@@ -3,7 +3,7 @@ class Router
 {
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
-    private $privateRoutes = ['Home', 'Logout','/Dash'];
+    private $privateRoutes = ['Home', 'Logout', '/Dash','/GestorProyectos'];
 
     public function __construct($pdo)
     {
@@ -20,8 +20,10 @@ class Router
     {
         require_once __DIR__ . "/Controllers/AuthController.php";
         require_once __DIR__ . "/Controllers/HomeController.php";
+        require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
+        $GestorProyectosController = new GestorProyectosController($this->pdo);
 
         if (in_array($url, $this->privateRoutes) && !$this->isAuthenticated()) {
             header("Location: " . BASE_URL . "/Login");
@@ -49,6 +51,9 @@ class Router
                 break;
             case 'Dash':
                 $controller->dash();
+                break;
+            case 'GestorProyectos':
+                $GestorProyectosController->index();
                 break;
             case 'Logout':
                 $controller->logout();
