@@ -1,57 +1,8 @@
 <?php
-session_start();
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empresa X - Gestor de Proyectos</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="main_page_background">
-    <header>
-        <img src="images/logo.png.webp" alt="Empresa X" style="width:100px; height:100px;">
-        <h1 class="tittle">EMPRESA X</h1>
-        <div class="btns">
-            <a href="php/registers/register_main.php" class="btn-register">REGISTRARSE</a>
-            <a href="php/registers/register_main.php" class="btn-login">INICIAR SESIÓN</a>
-        </div>
-    </header>
+require_once __DIR__ . "/app/config.php";
+require_once __DIR__ . "/app/Router.php";
 
-    <section class="hero">
-        <h1>GESTOR DE<br>PROYECTOS EMPRESARIALES</h1>
-        <p>En esta página podrás registrar tus proyectos, recursos para poder evaluarlos con éxito, verificar estadísticas y optimizar los tiempos para que se lleven adecuadamente por los colaboradores.</p>
-        <button href="php/registers/register_main.php" >REGISTRARSE AHORA</button>
-    </section>
+$url = $_GET['url'] ?? '';
 
-    <section class="features">
-        <h2>En esta página podrás:</h2>
-        <div class="cards">
-            <div class="card">
-                <img src="images/img_2.webp" alt="Seguimiento de proyectos">
-                <p>Hacer seguimiento de proyectos, clientes y sus contactos.</p>
-            </div>
-            <div class="card">
-                <img src="images/img_3.jpg" alt="Registro de ventas">
-                <p>Realizar un registro de ventas o cierre de una empresa.</p>
-            </div>
-            <div class="card">
-                <img src="images/img_4.jpg" alt="Asignar tareas">
-                <p>Asignar tareas a colaboradores y generación de estadísticas.</p>
-            </div>
-        </div>
-        <button href="php/registers/register_main.php" class="btn-main">Registrar Proyecto</button>
-    </section>
-
-    <footer>
-        <img src="images/logo.png.webp" alt="Empresa X" style="width:200px; height:200px;">
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Proyectos</a>
-            <a href="#">Contacto</a>
-            <a href="#">Ayuda</a>
-        </nav>
-    </footer>
-</body>
-</html>
+$router = new Router($pdo);
+$router->dispatch($url);

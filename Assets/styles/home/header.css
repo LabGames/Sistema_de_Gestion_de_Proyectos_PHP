@@ -1,0 +1,72 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  margin-left: 260px;
+  background: #0f1422;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #e9eefb;
+}
+
+#nav-toggle:checked ~ .topbar {
+  margin-left: 100px;
+}
+
+.topbar-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.topbar-title h1 {
+  font-size: 18px;
+  margin: 0;
+}
+.topbar-subtitle {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  outline: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e9eefb;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+.user-chip img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
