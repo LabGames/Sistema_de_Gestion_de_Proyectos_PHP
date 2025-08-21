@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Empresa X</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/style_new_proyect.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/np_abp_ac.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <script src="<?= BASE_URL ?>/Assets/js/date_system.js"></script>
     <script src="<?= BASE_URL ?>/Assets/js/load_button.js"></script>

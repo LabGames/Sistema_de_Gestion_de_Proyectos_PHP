@@ -56,6 +56,12 @@ class Router
             case 'CreateNewProyect':
                 $controller->new_proyect();
                 break;
+            case 'ManageCollaborators':
+                $controller->admin_collab();
+                break;
+            case 'ManageManagers':
+                $controller->admin_manager();
+                break;
             default:
                 echo "404 - Página no encontrada";
         }
