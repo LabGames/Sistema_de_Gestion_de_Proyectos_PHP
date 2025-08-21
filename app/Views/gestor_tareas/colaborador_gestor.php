@@ -10,7 +10,7 @@
     <div class="container">
         <div class="card">
             <h2 class="card-title">COLABORADORES</h2>
-            <p class="project-info">Proyecto Asociado: Campaña para el medio ambiente</p>
+            <p class="project-info">Proyecto Asociado: Campaña para el medio ambiente 12345678</p>
             <div class="collaborator-list">
                 <div class="collaborator-item">
                     <span class="collaborator-name">Jorge Dante</span>
