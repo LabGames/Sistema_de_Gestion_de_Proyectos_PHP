@@ -21,8 +21,6 @@ class AuthController
         include __DIR__ . "/../Views/home/index.php";
     }
 
-
-
     public function index_registro()
     {
         include __DIR__ . "/../Views/register.php";
@@ -31,6 +29,11 @@ class AuthController
     public function welcome()
     {
         include __DIR__ . "/../Views/main.php";
+    }
+
+     public function new_proyect()
+    {
+        include __DIR__ . "/../Views/new_proyect.php";
     }
 
     public function login()

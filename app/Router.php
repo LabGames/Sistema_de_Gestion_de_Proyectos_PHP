@@ -53,6 +53,9 @@ class Router
             case 'Logout':
                 $controller->logout();
                 break;
+            case 'CreateNewProyect':
+                $controller->new_proyect();
+                break;
             default:
                 echo "404 - Página no encontrada";
         }
