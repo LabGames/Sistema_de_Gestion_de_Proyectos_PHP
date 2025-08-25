@@ -96,8 +96,8 @@
     </main>
 
     <footer>
-        <button class="title_button">Regresar</button>
-        <img src="<?= BASE_URL ?>/Assets/img/logo.png" alt="Planeta" class="task-image" width="200" height="200">
-    </footer>
+        <!-- <button class="title_button">Regresar</button>
+        <img src="<?= BASE_URL ?>/Assets/img/logo.png" alt="Planeta" class="task-image" width="200" height="200"> -->
+    </footer> 
 </body>
 </html>
