@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/usuarios/usuarios.css">
 <script src="<?= BASE_URL ?>/Assets/js/usuarios/usuarios.js"></script>
 
-<!-- Formulario -->
 <div class="user-container">
     <h2>Registrar Usuario</h2>
     <form>
@@ -34,7 +33,6 @@
     </form>
 </div>
 
-<!-- Tabla -->
 <div class="user-container">
     <h2>Lista de Usuarios</h2>
     <table id="tablaUsuarios" style="width:100%">
