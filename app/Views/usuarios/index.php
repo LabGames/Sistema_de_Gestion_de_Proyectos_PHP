@@ -33,6 +33,7 @@
     </form>
 </div>
 
+<!-- Tabla -->
 <div class="user-container">
     <h2>Lista de Usuarios</h2>
     <table id="tablaUsuarios" style="width:100%">
