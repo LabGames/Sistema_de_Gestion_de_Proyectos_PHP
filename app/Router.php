@@ -3,7 +3,8 @@ class Router
 {
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
-    private $privateRoutes = ['Home', 'Logout', '/Dash', '/GestorProyectos', '/GestorTareas'];
+    private $privateRoutes = ['Home', 'Logout', '/Dash', '/GestorProyectos', '/GestorTareas', 'Usuarios', 'Rol'];
+
 
     public function __construct($pdo)
     {
@@ -20,10 +21,14 @@ class Router
     {
         require_once __DIR__ . "/Controllers/AuthController.php";
         require_once __DIR__ . "/Controllers/HomeController.php";
+        require_once __DIR__ . "/Controllers/UserController.php";
+        require_once __DIR__ . "/Controllers/RolController.php";
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
+        $UserController = new UserController($this->pdo);
+        $rolController = new RolController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
         $GestorTareasController = new GestorTareasController($this->pdo);
 
@@ -62,6 +67,28 @@ class Router
                 break;
             case 'Logout':
                 $controller->logout();
+                break;
+
+            case 'Usuarios':
+                $UserController->index();
+                break;
+            case 'Usuarios/Listar':
+                $UserController->listar();
+                break;
+            case 'Usuarios/Registrar':
+                $UserController->listar();
+                break;
+            case 'Rol/Listar':
+                $rolController->listar();
+                break;
+            case 'CreateNewProyect':
+                $controller->new_proyect();
+                break;
+            case 'ManageCollaborators':
+                $controller->admin_collab();
+                break;
+            case 'ManageManagers':
+                $controller->admin_manager();
                 break;
             default:
                 echo "404 - Página no encontrada";
