@@ -69,13 +69,13 @@ class Router
             case 'Rol/Listar':
                 $rolController->listar();
                 break;
-            case 'CreateNewProyect':
+            case 'Home/Crear-Nuevo-Proyecto':
                 $controller->new_proyect();
                 break;
-            case 'ManageCollaborators':
+            case 'Home/Administrar-Colaboradores':
                 $controller->admin_collab();
                 break;
-            case 'ManageManagers':
+            case 'Home/Administrar-Jefes-De-Proyecto':
                 $controller->admin_manager();
                 break;
             default:
