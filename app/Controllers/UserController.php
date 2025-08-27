@@ -50,9 +50,30 @@ class UserController
         $password = $_POST['password'] ?? null;
         $estado   = 0;
 
+        $errores = [];
+
+        if (empty($name)) {
+            $errores[] = "El nombre es obligatorio";
+        }
+        if (empty($rol)) {
+            $errores[] = "El rol es obligatorio";
+        }
+        if (empty($email)) {
+            $errores[] = "El correo es obligatorio";
+        }
+        if (empty($password)) {
+            $errores[] = "La contraseña es obligatoria";
+        }
+
+        if (!empty($errores)) {
+            echo json_encode([
+                "success" => false,
+                "message" => $errores
+            ]);
+            return;
+        }
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
         $resultado = $this->user->create($name, $rol, $email, $hashedPassword, $estado);
 
         if ($resultado) {
@@ -63,10 +84,11 @@ class UserController
         } else {
             echo json_encode([
                 "success" => false,
-                "message" => "Error al registrar usuario"
+                "message" => ["Error al registrar usuario"]
             ]);
         }
     }
+
 
     public function actualizar()
     {
@@ -133,7 +155,7 @@ class UserController
 
     public function activar()
     {
-        $id=$_POST['id'] ?? null;
+        $id = $_POST['id'] ?? null;
         if ($this->user->activar($id)) {
             echo json_encode([
                 "success" => true,
@@ -149,7 +171,7 @@ class UserController
 
     public function inhabilitar()
     {
-        $id=$_POST['id'] ?? null;
+        $id = $_POST['id'] ?? null;
 
         if ($this->user->inhabilitar($id)) {
             echo json_encode([
