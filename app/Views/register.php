@@ -16,7 +16,7 @@
 <body>
     <section class="register-page">
         <div class="register-glow"></div>
-        <form class="register-card">
+        <form class="register-card" id="formRegistrarUsuario">
             <header class="register-header">
                 <h1>Crear cuenta</h1>
                 <p>Regístrate para gestionar tus proyectos.</p>
@@ -30,7 +30,7 @@
                     <input
                         type="text"
                         placeholder="Tu nombre"
-                        name="name" required />
+                        id="name"/>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     <input
                         type="email"
                         placeholder="tu@correo.com"
-                        name="email" required />
+                        id="email" />
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                         type="password"
                         placeholder="Mínimo 8 caracteres"
                         name="password"
-                        id="password" required />
+                        id="password" />
                     <i class="fa-solid fa-eye toggle-password" data-target="password"></i>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                         type="password"
                         placeholder="Repite la contraseña"
                         name="password_confirm"
-                        id="password_confirm" required />
+                        id="password_confirm"/>
                     <i class="fa-solid fa-eye toggle-password" data-target="password_confirm"></i>
                 </div>
             </div>
@@ -81,12 +81,12 @@
 
             <label class="check">
                 <input
-                    type="checkbox" required />
+                    type="checkbox"/>
                 <span>
                     Acepto los <a href="" class="link">términos y condiciones</a>.
                 </span>
             </label>
-            <button class="btn-submit" type="button" onclick="register()">
+            <button class="btn-submit" type="button" onclick="registrarUsuario()">
                 <i class="fa-solid fa-check"></i>
                 <span>Registrarme</span>
             </button>

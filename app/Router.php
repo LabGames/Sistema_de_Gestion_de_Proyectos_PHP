@@ -50,9 +50,6 @@ class Router
             case 'Registro':
                 $controller->index_registro();
                 break;
-            case 'Registro/Crear':
-                $controller->register();
-                break;
             case 'Home':
                 $HomeController->index();
                 break;
@@ -75,8 +72,23 @@ class Router
             case 'Usuarios/Listar':
                 $UserController->listar();
                 break;
+            case 'Usuarios/ObtenerUsuario':
+                $UserController->obtenerUsuario();
+                break;
             case 'Usuarios/Registrar':
-                $UserController->listar();
+                $UserController->registrar();
+                break;
+            case 'Usuarios/Actualizar':
+                $UserController->actualizar();
+                break;
+            case 'Usuarios/Eliminar':
+                $UserController->eliminar();
+                break;
+            case 'Usuarios/Activar':
+                $UserController->activar();
+                break;
+            case 'Usuarios/Inhabilitar':
+                $UserController->inhabilitar();
                 break;
             case 'Rol/Listar':
                 $rolController->listar();
