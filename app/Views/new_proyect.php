@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/np_abp_ac.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <script src="<?= BASE_URL ?>/Assets/js/date_system.js"></script>
-    <script src="<?= BASE_URL ?>/Assets/js/load_button.js"></script>
     <script>
         const BASE_URL = "<?= BASE_URL ?>";
     </script>
+    <script src="<?= BASE_URL ?>/Assets/js/load_button.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <main> 
-        <form form method="post" action="<?= BASE_URL ?>/Guardando_Proyecto" enctype="multipart/form-data">
+        <form id="form-proyecto" method="post" action="<?= BASE_URL ?>/Guardando_Proyecto" data-base-url="<?= BASE_URL ?>" enctype="multipart/form-data" novalidate>
             <nav>
                 <table>
                     <tr>
@@ -101,7 +101,7 @@
                         <th colspan="2"><a class="mini-title">Adjuntar Archivos:</a></th>
                     </tr>
                     <tr>
-                        <th colspan="2"><input type="file" name="project_files" accept=".pdf,.docx,.xlsx" placeholder="Ingrese un archivo" multiple></th>
+                        <th colspan="2"><input type="file" name="project_files[]" accept=".pdf,.docx,.xlsx" placeholder="Ingrese un archivo" multiple></th>
                     </tr>
                     <tr>
                         <th colspan="2"><button type="submit" class="btn-style">Registrar Proyecto</button></th>
