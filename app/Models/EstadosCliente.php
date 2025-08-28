@@ -10,7 +10,7 @@ class EstadosCliente
 
     public function getAll()
     {
-        $stmt = $this->pdo->query("SELECT * FROM estados_clientes");
+        $stmt = $this->pdo->query("SELECT * FROM estados_cliente");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

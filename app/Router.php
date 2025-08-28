@@ -24,6 +24,7 @@ class Router
         require_once __DIR__ . "/Controllers/UserController.php";
         require_once __DIR__ . "/Controllers/RolController.php";
         require_once __DIR__ . "/Controllers/ClientesController.php";
+        require_once __DIR__ . "/Controllers/ContactosController.php";
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
         $controller = new AuthController($this->pdo);
@@ -31,6 +32,7 @@ class Router
         $UserController = new UserController($this->pdo);
         $rolController = new RolController($this->pdo);
         $clientesController = new ClientesController($this->pdo);
+        $contactosController = new ContactosController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
         $GestorTareasController = new GestorTareasController($this->pdo);
 
@@ -95,8 +97,20 @@ class Router
             case 'Clientes':
                 $clientesController->index();
                 break;
+            case 'Clientes/ObtenerCliente':
+                $clientesController->obtenerCliente();
+                break;
             case 'Clientes/Listar':
                 $clientesController->listar();
+                break;
+            case 'Clientes/ListarEstados':
+                $clientesController->listarEstados();
+                break;
+            case 'Clientes/Registrar':
+                $clientesController->registrar();
+                break;
+            case 'Contactos/Listar':
+                $contactosController->listar();
                 break;
             case 'Rol/Listar':
                 $rolController->listar();

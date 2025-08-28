@@ -1,8 +1,67 @@
 $(document).ready(function () {
   smartWizard();
   listar();
+  listarEstados();
+  listarEstadosModal();
+  listarContactos();
 });
 let tabla;
+
+function cerrarModal() {
+  const modal = document.getElementById("clienteModal");
+  modal.classList.remove("show");
+}
+
+function listarEstados() {
+  fetch(`${BASE_URL}/Clientes/ListarEstados`)
+    .then((response) => response.json())
+    .then((roles) => {
+      const select = document.getElementById("estado");
+      roles.forEach((r) => {
+        const option = document.createElement("option");
+        option.value = r.id;
+        option.textContent = r.nombre;
+        select.appendChild(option);
+      });
+    })
+    .catch((error) => {
+      console.error("Error al cargar estados:", error);
+    });
+}
+
+function listarContactos() {
+  fetch(`${BASE_URL}/Contactos/Listar`)
+    .then((response) => response.json())
+    .then((roles) => {
+      const select = document.getElementById("contacto_modal");
+      roles.forEach((r) => {
+        const option = document.createElement("option");
+        option.value = r.id;
+        option.textContent = r.nombre;
+        select.appendChild(option);
+      });
+    })
+    .catch((error) => {
+      console.error("Error al cargar estados:", error);
+    });
+}
+
+function listarEstadosModal() {
+  fetch(`${BASE_URL}/Clientes/ListarEstados`)
+    .then((response) => response.json())
+    .then((roles) => {
+      const select = document.getElementById("estado_modal");
+      roles.forEach((r) => {
+        const option = document.createElement("option");
+        option.value = r.id;
+        option.textContent = r.nombre;
+        select.appendChild(option);
+      });
+    })
+    .catch((error) => {
+      console.error("Error al cargar estados:", error);
+    });
+}
 
 function smartWizard() {
   $("#smartwizard").smartWizard({
@@ -71,14 +130,30 @@ function listar() {
 
 function registrarCliente() {
   const nombreCliente = document.getElementById("nombre").value.trim();
-  const empresa = document.getElementById("rol").value.trim();
-  const rubro = document.getElementById("correo").value.trim();
-  const estado = document.getElementById("password").value.trim();
+  const empresa = document.getElementById("empresa").value.trim();
+  const rubro = document.getElementById("rubro").value.trim();
+  const estado = document.getElementById("estado").value.trim();
+
+  const nombreContacto = document
+    .getElementById("nombre_contacto")
+    .value.trim();
+  const correoContacto = document.getElementById("correo").value.trim();
+  const telefonoContacto = document.getElementById("telefono").value.trim();
+
+  const correoUsuario = document.getElementById("correo_usuario").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   const formData = new FormData();
-  formData.append("name", name);
-  formData.append("rol", rol);
-  formData.append("email", email);
+  formData.append("nombreCliente", nombreCliente);
+  formData.append("empresa", empresa);
+  formData.append("rubro", rubro);
+  formData.append("estado", estado);
+
+  formData.append("nombreContacto", nombreContacto);
+  formData.append("correoContacto", correoContacto);
+  formData.append("telefonoContacto", telefonoContacto);
+
+  formData.append("correoUsuario", correoUsuario);
   formData.append("password", password);
 
   fetch(`${BASE_URL}/Clientes/Registrar`, {
@@ -90,7 +165,7 @@ function registrarCliente() {
       if (data.success) {
         Swal.fire({
           icon: "success",
-          title: "Cliente registrado",
+          title: data.message,
           text: "El cliente fue registrado correctamente.",
           background: "#1e293b",
           color: "#e2e8f0",
@@ -127,6 +202,99 @@ function registrarCliente() {
         icon: "error",
         title: "Error de servidor",
         text: "Hubo un problema al registrar el cliente.",
+        confirmButtonColor: "#ef4444",
+      });
+    });
+}
+
+function editarCliente(id) {
+  const modal = document.getElementById("clienteModal");
+
+  const formData = new FormData();
+  formData.append("id", id);
+
+  fetch(`${BASE_URL}/Clientes/ObtenerCliente`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((cliente) => {
+      document.getElementById("id_user").value = cliente.user_id;
+      document.getElementById("id_cliente").value = cliente.id;
+      document.getElementById("nombre_modal").value = cliente.nombre_cliente;
+      document.getElementById("empresa_modal").value = cliente.empresa;
+      document.getElementById("rubro_modal").value = cliente.rubro;
+      document.getElementById("estado_modal").value = cliente.estado_id;
+      document.getElementById("contacto_modal").value = cliente.contacto_principal;
+      modal.classList.add("show");
+    })
+    .catch((error) => console.error("Error al obtener usuario:", error));
+}
+
+
+function actualizarCliente() {
+  const nombreCliente = document.getElementById("nombre").value.trim();
+  const empresa = document.getElementById("empresa").value.trim();
+  const rubro = document.getElementById("rubro").value.trim();
+  const estado = document.getElementById("estado").value.trim();
+  const contacto = document.getElementById("contacto_modal").value.trim();
+  const user_id = document.getElementById("id_user").value.trim();
+
+
+  const formData = new FormData();
+  formData.append("nombreCliente", nombreCliente);
+  formData.append("empresa", empresa);
+  formData.append("rubro", rubro);
+  formData.append("estado", estado);
+  formData.append("contacto", contacto);
+  formData.append("user_id", user_id);
+
+  fetch(`${BASE_URL}/Clientes/Actualizar`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        Swal.fire({
+          icon: "success",
+          title: data.message,
+          text: "El cliente fue actualizado correctamente.",
+          background: "#1e293b",
+          color: "#e2e8f0",
+          iconColor: "#22c55e",
+          confirmButtonColor: "#6366f1",
+        }).then(() => {
+          document.getElementById("formActualizarCliente").reset();
+          listar();
+        });
+      } else {
+        let erroresHtml = "";
+        if (Array.isArray(data.message)) {
+          erroresHtml = "<div><ul style='text-align:center'></div>";
+          data.message.forEach((errores) => {
+            erroresHtml += `<li>${errores}</li>`;
+          });
+          erroresHtml += "</ul>";
+        } else {
+          erroresHtml = data.message;
+        }
+        Swal.fire({
+          icon: "error",
+          title: "Campos incompletos",
+          html: erroresHtml,
+          background: "#1e293b",
+          color: "#e2e8f0",
+          confirmButtonColor: "#ef4444",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error al actualizar cliente:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error de servidor",
+        text: "Hubo un problema al actualizar el cliente.",
         confirmButtonColor: "#ef4444",
       });
     });

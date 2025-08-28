@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/clientes/clientes.css">
 <script src="<?= BASE_URL ?>/Assets/js/clientes/clientes.js"></script>
+<?php include __DIR__ . "/modal.php"; ?>
 
 <div class="form-container">
   <h2>Registrar Cliente</h2>
