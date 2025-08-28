@@ -31,11 +31,6 @@ class AuthController
         include __DIR__ . "/../Views/main.php";
     }
 
-    public function new_proyect()
-    {
-        include __DIR__ . "/../Views/new_proyect.php";
-    }
-
     public function admin_collab()
     {
         include __DIR__ . "/../Views/admin_collab.php";

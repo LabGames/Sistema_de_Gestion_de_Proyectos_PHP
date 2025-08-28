@@ -3,7 +3,18 @@ class Router
 {
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
-    private $privateRoutes = ['Home', 'Logout', 'Dash', 'Usuarios', 'Rol'];
+    private $privateRoutes = ['Home', 
+                                'Logout', 
+                                'Dash', 
+                                'Usuarios', 
+                                'Rol',
+                                'Listar_Estados',
+                                'Listar_Tipos',
+                                'Home/Proyectos',
+                                'Home/Proyectos/Crear-Nuevo-Proyecto', 
+                                'Home/Administrar-Colaboradores', 
+                                'Home/Administrar-Jefes-De-Proyecto'
+                            ];
 
     public function __construct($pdo)
     {
@@ -22,10 +33,12 @@ class Router
         require_once __DIR__ . "/Controllers/HomeController.php";
         require_once __DIR__ . "/Controllers/UserController.php";
         require_once __DIR__ . "/Controllers/RolController.php";
+        require_once __DIR__ . "/Controllers/ProyectController.php";
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
         $UserController = new UserController($this->pdo);
         $rolController = new RolController($this->pdo);
+        $ProyectController = new ProyectController($this->pdo);
 
         if (in_array($url, $this->privateRoutes) && !$this->isAuthenticated()) {
             header("Location: " . BASE_URL . "/Login");
@@ -69,8 +82,20 @@ class Router
             case 'Rol/Listar':
                 $rolController->listar();
                 break;
-            case 'Home/Crear-Nuevo-Proyecto':
-                $controller->new_proyect();
+            case 'Home/Proyectos/Crear-Nuevo-Proyecto':
+                $ProyectController->new_proyect();
+                break;
+            case 'Listar_Estados':
+                $ProyectController->listarEstados();
+                break;
+            case 'Listar_Tipos':
+                $ProyectController->listarTipos();
+                break;
+            case 'Guardando_Proyecto':
+                $ProyectController->store();
+                break;
+            case 'Home/Proyectos':
+                $ProyectController->index();
                 break;
             case 'Home/Administrar-Colaboradores':
                 $controller->admin_collab();

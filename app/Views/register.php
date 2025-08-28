@@ -92,7 +92,7 @@
             </button>
 
             <p class="alt">
-                ¿Ya tienes cuenta? <a class="link" href="/login">Inicia sesión</a>
+                ¿Ya tienes cuenta? <a class="link" href="<?= BASE_URL ?>/Login">Inicia sesión</a>
             </p>
         </form>
     </section>
