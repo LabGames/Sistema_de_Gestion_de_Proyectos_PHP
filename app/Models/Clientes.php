@@ -10,9 +10,14 @@ class Clientes
 
     public function getAll()
     {
-        $stmt = $this->pdo->query("SELECT * FROM clientes");
+        $sql = "SELECT c.*, e.nombre AS estado_nombre
+            FROM clientes c
+            INNER JOIN estados_cliente e ON c.estado_id = e.id";
+
+        $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     public function findById($id)
     {

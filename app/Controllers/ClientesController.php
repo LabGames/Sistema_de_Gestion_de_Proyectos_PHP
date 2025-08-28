@@ -195,4 +195,36 @@ class ClientesController
             ]);
         }
     }
+
+    public function eliminar()
+    {
+        $id = $_POST['id'] ?? null;
+
+        if (!$id) {
+            echo json_encode([
+                "success" => false,
+                "message" => "ID no recibido"
+            ]);
+            return;
+        }
+
+        $cliente = $this->clientes->findById($id);
+        $idUser = $cliente["user_id"];
+        
+        $resultado1 = $this->clientes->delete($id);
+        $resultado2 = $this->user->delete($idUser);
+        $resultado3 = $this->contactos->deletebyCliente($id);
+
+        if ($resultado1 && $resultado2 && $resultado3) {
+            echo json_encode([
+                "success" => true,
+                "message" => "Cliente eliminado correctamente"
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => "No se pudo eliminar el usuario"
+            ]);
+        }
+    }
 }

@@ -51,7 +51,7 @@ class User
             ':estado'   => $estado
         ]);
 
-        return $this->pdo->lastInsertId(); // 👈 ahora sí devuelve el ID del usuario creado
+        return $this->pdo->lastInsertId();
     }
 
 

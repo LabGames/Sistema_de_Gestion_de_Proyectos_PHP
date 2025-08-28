@@ -118,7 +118,7 @@ function listar() {
               data: "rubro",
             },
             {
-              data: "estado_id",
+              data: "estado_nombre",
             },
             {
               data: null,
@@ -317,4 +317,69 @@ function actualizarCliente() {
         confirmButtonColor: "#ef4444",
       });
     });
+}
+
+function eliminarCliente(id) {
+  Swal.fire({
+    title: "¿Estás seguro?",
+    text: "¡No podrás revertir esto!",
+    icon: "warning",
+    background: "#1e293b",
+    color: "#e2e8f0",
+    iconColor: "#facc15",
+    showCancelButton: true,
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar",
+    customClass: {
+      popup: "swal-popup",
+      title: "swal-title",
+      htmlContainer: "swal-text",
+      confirmButton: "swal-confirm",
+      cancelButton: "swal-cancel",
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const formData = new FormData();
+      formData.append("id", id);
+
+      fetch(`${BASE_URL}/Clientes/Eliminar`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            Swal.fire({
+              icon: "success",
+              title: "¡Eliminado!",
+              text: data.message ,
+              background: "#1e293b",
+              color: "#e2e8f0",
+              confirmButtonColor: "#6366f1",
+            });
+            listar();
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: data.message || "No se pudo eliminar el usuario.",
+              background: "#1e293b",
+              color: "#e2e8f0",
+              confirmButtonColor: "#ef4444",
+            });
+          }
+        })
+        .catch((err) => {
+          console.error("Error al eliminar usuario:", err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un problema en el servidor.",
+            background: "#1e293b",
+            color: "#e2e8f0",
+            confirmButtonColor: "#ef4444",
+          });
+        });
+    }
+  });
 }

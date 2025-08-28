@@ -69,4 +69,11 @@ class Contactos
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
+
+    public function deletebyCliente($id)
+    {
+        $sql = "DELETE FROM contactos WHERE cliente_id = :cliente_id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':cliente_id' => $id]);
+    }
 }

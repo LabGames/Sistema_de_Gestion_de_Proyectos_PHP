@@ -112,6 +112,9 @@ class Router
             case 'Clientes/Actualizar':
                 $clientesController->actualizar();
                 break;
+            case 'Clientes/Eliminar':
+                $clientesController->eliminar();
+                break;
             case 'Contactos/Listar':
                 $contactosController->listar();
                 break;
