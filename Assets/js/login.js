@@ -1,46 +1,62 @@
-async function login() {
-  const email = document.querySelector("input[name='email']").value.trim();
-  const password = document
-    .querySelector("input[name='password']")
-    .value.trim();
+function login() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   if (!email || !password) {
-    return Swal.fire({
+    Swal.fire({
       icon: "warning",
-      title: "Campos vacíos",
-      text: "Por favor completa todos los campos.",
+      title: "Campos incompletos",
+      text: "Todos los campos son obligatorios.",
+      background: "#1e293b",
+      color: "#e2e8f0",
+      iconColor: "#facc15",
+      confirmButtonColor: "#6366f1",
+      customClass: {
+        title: "swal-title",
+        popup: "swal-popup",
+        confirmButton: "swal-confirm",
+      },
     });
+    return;
   }
 
-  try {
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
+  const formData = new FormData();
+  formData.append("email", email);
+  formData.append("password", password);
 
-    const response = await fetch(`${BASE_URL}/Login/Ingresar`, {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      window.location.href = data.redirect;
-    } else {
+  fetch(`${BASE_URL}/Login/Ingresar`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        window.location.href = data.redirect;
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title: data.message,
+          background: "#1e293b",
+          color: "#e2e8f0",
+          iconColor: "#facc15",
+          confirmButtonColor: "#6366f1",
+          customClass: {
+            title: "swal-title",
+            popup: "swal-popup",
+            confirmButton: "swal-confirm",
+          },
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error al registrar usuarios:", error);
       Swal.fire({
         icon: "error",
-        title: "Error",
-        text: data.message || "Correo o contraseña incorrectos.",
+        title: "Error de servidor",
+        text: "Hubo un problema al registrar el usuario.",
+        confirmButtonColor: "#ef4444",
       });
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Error del servidor",
-      text: "Intenta nuevamente más tarde.",
     });
-  }
 }
 
 async function logout() {

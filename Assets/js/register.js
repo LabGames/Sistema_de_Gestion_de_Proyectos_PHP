@@ -103,3 +103,96 @@ async function register() {
     });
   }
 }
+
+function registrarUsuario() {
+  const name = document.getElementById("name").value.trim();
+  const rol = 1;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const password_confirm = document
+    .getElementById("password_confirm")
+    .value.trim();
+
+  if (!name || !rol || !email || !password) {
+    Swal.fire({
+      icon: "warning",
+      title: "Campos incompletos",
+      text: "Todos los campos son obligatorios.",
+      background: "#1e293b",
+      color: "#e2e8f0",
+      iconColor: "#facc15",
+      confirmButtonColor: "#6366f1",
+      customClass: {
+        title: "swal-title",
+        popup: "swal-popup",
+        confirmButton: "swal-confirm",
+      },
+    });
+    return;
+  } else if (password_confirm != password) {
+    Swal.fire({
+      icon: "warning",
+      title: "Las contraseñas no coinciden",
+      background: "#1e293b",
+      color: "#e2e8f0",
+      iconColor: "#facc15",
+      confirmButtonColor: "#6366f1",
+      customClass: {
+        title: "swal-title",
+        popup: "swal-popup",
+        confirmButton: "swal-confirm",
+      },
+    });
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("rol", rol);
+  formData.append("email", email);
+  formData.append("password", password);
+
+  fetch(`${BASE_URL}/Usuarios/Registrar`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Registro Completo",
+          text: "Tu cuenta se encuentra a la espera de ser activada.",
+          background: "#1e293b",
+          color: "#e2e8f0",
+          iconColor: "#22c55e",
+          confirmButtonColor: "#6366f1",
+          customClass: {
+            title: "swal-title",
+            popup: "swal-popup",
+            confirmButton: "swal-confirm",
+          },
+        }).then(() => {
+          document.getElementById("formRegistrarUsuario").reset();
+          listar();
+        });
+      } else {
+        console.log("Error: " + data.message);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: data.message || "No se pudo registrar el usuario",
+          confirmButtonColor: "#ef4444",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error al registrar usuarios:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error de servidor",
+        text: "Hubo un problema al registrar el usuario.",
+        confirmButtonColor: "#ef4444",
+      });
+    });
+}
