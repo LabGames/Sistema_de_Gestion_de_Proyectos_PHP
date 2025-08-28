@@ -14,6 +14,15 @@ class Contactos
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getByClienteId($cliente_id)
+    {
+        $sql = "SELECT * FROM contactos WHERE cliente_id = :cliente_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':cliente_id' => $cliente_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     public function findById($id)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM contactos WHERE id = :id");

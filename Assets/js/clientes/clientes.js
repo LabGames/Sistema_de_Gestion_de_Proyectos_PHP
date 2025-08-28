@@ -4,12 +4,14 @@ $(document).ready(function () {
   listarEstados();
   listarEstadosModal();
   listarContactos();
+  console.log(userId);
 });
 let tabla;
 
 function cerrarModal() {
   const modal = document.getElementById("clienteModal");
   modal.classList.remove("show");
+  document.getElementById("formActualizarCliente").reset();
 }
 
 function listarEstados() {
@@ -29,22 +31,36 @@ function listarEstados() {
     });
 }
 
-function listarContactos() {
-  fetch(`${BASE_URL}/Contactos/Listar`)
+function listarContactos(id, contactoSeleccionado = null) {
+  const formData = new FormData();
+  formData.append("id", id);
+
+  fetch(`${BASE_URL}/Contactos/Listar`, {
+    method: "POST",
+    body: formData,
+  })
     .then((response) => response.json())
-    .then((roles) => {
+    .then((contactos) => {
       const select = document.getElementById("contacto_modal");
-      roles.forEach((r) => {
+      select.innerHTML = "";
+
+      contactos.forEach((c) => {
         const option = document.createElement("option");
-        option.value = r.id;
-        option.textContent = r.nombre;
+        option.value = c.id;
+        option.textContent = c.nombre;
         select.appendChild(option);
       });
+
+      if (contactoSeleccionado) {
+        select.value = contactoSeleccionado;
+      }
     })
     .catch((error) => {
-      console.error("Error al cargar estados:", error);
+      console.error("Error al cargar contactos:", error);
     });
 }
+
+
 
 function listarEstadosModal() {
   fetch(`${BASE_URL}/Clientes/ListarEstados`)
@@ -209,7 +225,6 @@ function registrarCliente() {
 
 function editarCliente(id) {
   const modal = document.getElementById("clienteModal");
-
   const formData = new FormData();
   formData.append("id", id);
 
@@ -225,7 +240,9 @@ function editarCliente(id) {
       document.getElementById("empresa_modal").value = cliente.empresa;
       document.getElementById("rubro_modal").value = cliente.rubro;
       document.getElementById("estado_modal").value = cliente.estado_id;
-      document.getElementById("contacto_modal").value = cliente.contacto_principal;
+
+      listarContactos(id, cliente.contacto_principal);
+
       modal.classList.add("show");
     })
     .catch((error) => console.error("Error al obtener usuario:", error));
@@ -233,15 +250,16 @@ function editarCliente(id) {
 
 
 function actualizarCliente() {
-  const nombreCliente = document.getElementById("nombre").value.trim();
-  const empresa = document.getElementById("empresa").value.trim();
-  const rubro = document.getElementById("rubro").value.trim();
-  const estado = document.getElementById("estado").value.trim();
+  const id = document.getElementById("id_cliente").value.trim();
+  const nombreCliente = document.getElementById("nombre_modal").value.trim();
+  const empresa = document.getElementById("empresa_modal").value.trim();
+  const rubro = document.getElementById("rubro_modal").value.trim();
+  const estado = document.getElementById("estado_modal").value.trim();
   const contacto = document.getElementById("contacto_modal").value.trim();
   const user_id = document.getElementById("id_user").value.trim();
 
-
   const formData = new FormData();
+  formData.append("id", id);
   formData.append("nombreCliente", nombreCliente);
   formData.append("empresa", empresa);
   formData.append("rubro", rubro);
@@ -256,6 +274,7 @@ function actualizarCliente() {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
+        cerrarModal();
         Swal.fire({
           icon: "success",
           title: data.message,

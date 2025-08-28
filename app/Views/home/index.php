@@ -13,7 +13,10 @@
     <script src="https://cdn.datatables.net/2.3.3/js/dataTables.min.js"></script>
     <script>
         const BASE_URL = "<?= BASE_URL ?>";
+        const userId = <?= json_encode($_SESSION["user_id"] ?? null); ?>;
     </script>
+    <?php session_start(); ?>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>/Assets/js/login.js"></script>
     <title>Empresa X</title>

@@ -133,4 +133,66 @@ class ClientesController
             ]);
         }
     }
+
+    public function actualizar()
+    {
+        $id = $_POST['id'] ?? null;
+        $nombreCliente     = $_POST['nombreCliente'] ?? null;
+        $empresa      = $_POST['empresa'] ?? null;
+        $rubro    = $_POST['rubro'] ?? null;
+        $estado    = $_POST['estado'] ?? null;
+        $contacto    = $_POST['contacto'] ?? null;
+        $user_id    = $_POST['user_id'] ?? null;
+
+
+
+
+        $errores = [];
+        if (empty($id)) {
+            $errores[] = "No se encontro el ID del cliente";
+        }
+        if (empty($nombreCliente)) {
+            $errores[] = "El nombre del cliente es obligatorio";
+        }
+        if (empty($empresa)) {
+            $errores[] = "El nombre de la empresa es obligatorio";
+        }
+        if (empty($rubro)) {
+            $errores[] = "El rubro de la empresa es obligatorio";
+        }
+        if (empty($estado)) {
+            $errores[] = "El estado del cliente es obligatorio";
+        }
+        if (empty($contacto)) {
+            $errores[] = "El contacto principal es obligatorio";
+        }
+        if (empty($user_id)) {
+            $errores[] = "No se encontro el usuario";
+        }
+
+        if (!empty($errores)) {
+            echo json_encode([
+                "success" => false,
+                "message" => $errores
+            ]);
+            return;
+        }
+
+
+
+        $resultado = $this->clientes->update($id, $nombreCliente, $empresa, $rubro, $contacto, $estado, $user_id);
+
+
+        if ($resultado) {
+            echo json_encode([
+                "success" => true,
+                "message" => "Cliente actualizado"
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => ["Error al actualizar cliente"]
+            ]);
+        }
+    }
 }

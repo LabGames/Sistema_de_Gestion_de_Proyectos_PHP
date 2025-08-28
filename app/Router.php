@@ -109,6 +109,9 @@ class Router
             case 'Clientes/Registrar':
                 $clientesController->registrar();
                 break;
+            case 'Clientes/Actualizar':
+                $clientesController->actualizar();
+                break;
             case 'Contactos/Listar':
                 $contactosController->listar();
                 break;

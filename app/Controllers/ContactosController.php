@@ -14,8 +14,17 @@ class ContactosController
 
     public function listar()
     {
-        $contactos = $this->contactos->getAll();
+        $id = $_POST['id'] ?? null;
+
+        if (!$id) {
+            echo json_encode([
+                "success" => false,
+                "message" => "ID de cliente no proporcionado"
+            ]);
+            return;
+        }
+
+        $contactos = $this->contactos->getByClienteId($id);
         echo json_encode($contactos);
     }
-
 }
