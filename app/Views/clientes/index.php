@@ -1,44 +1,84 @@
 <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/clientes/clientes.css">
 <script src="<?= BASE_URL ?>/Assets/js/clientes/clientes.js"></script>
+<?php include __DIR__ . "/modal.php"; ?>
 
 <div class="form-container">
-    <h2>Registrar Usuario</h2>
-    <form id="formRegistrarUsuario">
-        <div class="form-group">
+  <h2>Registrar Cliente</h2>
+  <form id="formClientes">
+    <div id="smartwizard" class="smartwizardCustom">
+      <ul class="nav">
+        <li><a class="nav-link">Datos Generales</a></li>
+        <li><a class="nav-link" >Contacto</a></li>
+        <li><a class="nav-link">Credenciales</a></li>
+      </ul>
+
+      <div class="tab-content">
+        
+        <div id="step-1" class="tab-pane" role="tabpanel">
+          <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="off" />
-        </div>
-
-        <div class="form-group">
-            <label for="rol">Rol</label>
-            <select id="rol">
-                <option value="">Selecciona un rol</option>
+            <input type="text" id="nombre" placeholder="Ingresa el nombre del cliente" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" placeholder="Ingresa el nombre de la empresa" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="rubro">Rubro</label>
+            <input type="text" id="rubro" placeholder="Ingresa el rubro de la empresa" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado">
+              <option value="">Selecciona un estado</option>
             </select>
+          </div>
         </div>
-
-        <div class="form-group">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" placeholder="usuario@correo.com" autocomplete="off"/>
+        
+        <div id="step-2" class="tab-pane" role="tabpanel">
+          <div class="form-group">
+            <label for="nombre_contacto">Nombre del contacto</label>
+            <input type="text" id="nombre_contacto" placeholder="Ingresa el nombre del contacto" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo del contacto</label>
+            <input type="text" id="correo" placeholder="Ingresa el correo del contacto" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono del contacto</label>
+            <input type="text" id="telefono" placeholder="Ingresa el teléfono de la empresa" autocomplete="off" />
+          </div>
         </div>
-
-        <div class="form-group">
+        
+        <div id="step-3" class="tab-pane" role="tabpanel">
+          <div class="form-group">
+            <label for="correo_usuario">Correo</label>
+            <input type="text" id="correo_usuario" placeholder="Ingresa el correo del usuario" autocomplete="off" />
+          </div>
+          <div class="form-group">
             <label for="password">Contraseña</label>
             <input type="password" id="password" placeholder="********" autocomplete="off"/>
+          </div>
+          <div class="btn-container">
+            <button type="button" class="btn-primary-custom" onclick="registrarCliente()">Registrar</button>
+          </div>
         </div>
-        <div class="btn-container"><button type="button" class="btn-primary-custom" onclick="registrarUsuario()">Registrar</button></div>
 
-    </form>
+      </div>
+    </div>
+  </form>
 </div>
 
+
 <div class="table-container">
-    <h2>Lista de Usuarios</h2>
-    <table id="tablaUsuarios" style="width:100%">
+    <h2>Lista de Clientes</h2>
+    <table id="tablaClientes" style="width:100%">
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Email</th>
+                <th>Empresa</th>
+                <th>Rubro</th>
                 <th>Estado</th>
-                <th>Activar/Inhabilitar</th>
                 <th>Acciones</th>
             </tr>
         </thead>

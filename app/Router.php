@@ -3,7 +3,7 @@ class Router
 {
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
-    private $privateRoutes = ['Home', 'Logout', '/Dash', '/GestorProyectos', '/GestorTareas', 'Usuarios', 'Rol'];
+    private $privateRoutes = ['Home', 'Logout', '/Dash', '/GestorProyectos', '/GestorTareas', 'Usuarios', 'Rol', 'Clientes'];
 
 
     public function __construct($pdo)
@@ -23,12 +23,16 @@ class Router
         require_once __DIR__ . "/Controllers/HomeController.php";
         require_once __DIR__ . "/Controllers/UserController.php";
         require_once __DIR__ . "/Controllers/RolController.php";
+        require_once __DIR__ . "/Controllers/ClientesController.php";
+        require_once __DIR__ . "/Controllers/ContactosController.php";
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
         $UserController = new UserController($this->pdo);
         $rolController = new RolController($this->pdo);
+        $clientesController = new ClientesController($this->pdo);
+        $contactosController = new ContactosController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
         $GestorTareasController = new GestorTareasController($this->pdo);
 
@@ -89,6 +93,30 @@ class Router
                 break;
             case 'Usuarios/Inhabilitar':
                 $UserController->inhabilitar();
+                break;
+            case 'Clientes':
+                $clientesController->index();
+                break;
+            case 'Clientes/ObtenerCliente':
+                $clientesController->obtenerCliente();
+                break;
+            case 'Clientes/Listar':
+                $clientesController->listar();
+                break;
+            case 'Clientes/ListarEstados':
+                $clientesController->listarEstados();
+                break;
+            case 'Clientes/Registrar':
+                $clientesController->registrar();
+                break;
+            case 'Clientes/Actualizar':
+                $clientesController->actualizar();
+                break;
+            case 'Clientes/Eliminar':
+                $clientesController->eliminar();
+                break;
+            case 'Contactos/Listar':
+                $contactosController->listar();
                 break;
             case 'Rol/Listar':
                 $rolController->listar();

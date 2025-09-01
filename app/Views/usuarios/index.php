@@ -10,7 +10,7 @@
     <form id="formRegistrarUsuario">
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="off" />
+            <input type="text" id="nombre" placeholder="Nombre del usuario" autocomplete="off" />
         </div>
 
         <div class="form-group">

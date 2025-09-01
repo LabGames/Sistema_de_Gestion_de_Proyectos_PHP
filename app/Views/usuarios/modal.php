@@ -1,7 +1,7 @@
 <div id="userModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Nuevo Usuario</h2>
+      <h2>Editar Usuario</h2>
       <span class="close-btn" onclick="cerrarModal()">
         <i class="fa-solid fa-xmark"></i>
       </span>
