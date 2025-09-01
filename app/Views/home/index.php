@@ -15,8 +15,12 @@
         const BASE_URL = "<?= BASE_URL ?>";
         const userId = <?= json_encode($_SESSION["user_id"] ?? null); ?>;
     </script>
-    <?php session_start(); ?>
-
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    ?>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>/Assets/js/login.js"></script>
     <title>Empresa X</title>
