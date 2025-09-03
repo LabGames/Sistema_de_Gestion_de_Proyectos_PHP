@@ -72,4 +72,11 @@ class Clientes
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
+
+    public function estadoCliente($userId)
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM clientes WHERE user_id = :user_id");
+        $stmt->execute([':user_id' => $userId]);
+        return $stmt->fetchColumn() > 0;
+    }
 }

@@ -1,13 +1,16 @@
 <?php
 require_once __DIR__ . "/../Models/User.php";
+require_once __DIR__ . "/../Models/Clientes.php";
 
 class AuthController
 {
     private $user;
+    private $clientes;
 
     public function __construct($pdo)
     {
         $this->user = new User($pdo);
+        $this->clientes = new Clientes($pdo);
     }
 
     public function index()
@@ -68,6 +71,7 @@ class AuthController
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["name"]    = $user["nombre"];
             $_SESSION["email"]   = $user["email"];
+            $_SESSION["estado_cliente"] = $this->clientes->estadoCliente($user["id"]);
             echo json_encode([
                 "success" => true,
                 "redirect" => BASE_URL . "/Home"

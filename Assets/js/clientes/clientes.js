@@ -4,7 +4,6 @@ $(document).ready(function () {
   listarEstados();
   listarEstadosModal();
   listarContactos();
-  console.log(userId);
 });
 let tabla;
 

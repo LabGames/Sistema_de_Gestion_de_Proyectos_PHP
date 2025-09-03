@@ -14,6 +14,7 @@
     <script>
         const BASE_URL = "<?= BASE_URL ?>";
         const userId = <?= json_encode($_SESSION["user_id"] ?? null); ?>;
+        const estadoCliente = <?= json_encode($_SESSION["estado_cliente"] ?? null); ?>;
     </script>
     <?php
     if (session_status() === PHP_SESSION_NONE) {
