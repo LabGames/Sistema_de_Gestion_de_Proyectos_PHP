@@ -3,6 +3,7 @@ require_once __DIR__ . "/../Models/Proyectos/Estados.php";
 require_once __DIR__ . "/../Models/Proyectos/Tipos.php";
 require_once __DIR__ . "/../Models/Proyectos/Proyecto.php";
 require_once __DIR__ . "/../Models/User.php";
+require_once __DIR__ . "/../Models/Clientes.php";
 
 class ProyectController
 {
@@ -10,6 +11,7 @@ class ProyectController
     private $tipos;
     private $usuarios;
     private $proyectos;
+    private $clientes;
 
     public function __construct($pdo)
     {
@@ -17,6 +19,7 @@ class ProyectController
         $this->tipos   = new Tipos($pdo);
         $this->usuarios = new User($pdo);
         $this->proyectos = new Proyecto($pdo);
+        $this->clientes = new Clientes($pdo);
     }
 
     public function index()
@@ -31,7 +34,7 @@ class ProyectController
     {
         $tipos_value = $this->tipos->getAll();
         $estados_value = $this->estados->getAll();
-        $usuarios_value = $this->usuarios->getByRolId(3);
+        $clientes_value = $this->clientes->getAll();
         
         include __DIR__ . "/../Views/new_proyect.php";
     }
@@ -87,8 +90,7 @@ class ProyectController
             $save = $this->proyectos->create($data);
 
             if ($save) {
-                $lastId = $this->proyectos->pdo->lastInsertId();
-                $this->proyectos->actualizarTiempoReal($lastId);
+                $this->proyectos->actualizarTiempoReal($save);
 
                 echo "<script>alert('Proyecto registrado correctamente'); window.location.href='".BASE_URL."/Home/Proyectos';</script>";
             } else {

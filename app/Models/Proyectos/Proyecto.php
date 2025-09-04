@@ -11,14 +11,14 @@ class Proyecto
     public function create($data)
     {
         $sql = "INSERT INTO proyectos 
-                (nombre, cliente_id, tipo_id, estado_id, fecha_inicio, fecha_fin, tiempo_estimado_horas, jefe_proyecto_id, pronostico, ingresos, archivo, tiempo_real_horas)
-                VALUES (:nombre, :cliente_id, :tipo_id, :estado_id, :fecha_inicio, :fecha_fin, :tiempo_estimado_horas, :jefe_proyecto_id, :pronostico, :ingresos, :archivo, :tiempo_real_horas)";
+                (nombre, cliente_id, tipo_id, estado_id, fecha_inicio, fecha_fin, tiempo_estimado_horas, jefe_proyecto_id, pronostico, ingresos, tiempo_real_horas)
+                VALUES (:nombre, :cliente_id, :tipo_id, :estado_id, :fecha_inicio, :fecha_fin, :tiempo_estimado_horas, :jefe_proyecto_id, :pronostico, :ingresos, :tiempo_real_horas)";
 
         $stmt = $this->pdo->prepare($sql);
 
         $data['tiempo_real_horas'] = 0;
 
-        return $stmt->execute([
+        $stmt->execute([
             ':nombre' => $data['nombre'],
             ':cliente_id' => $data['cliente_id'],
             ':tipo_id' => $data['tipo_id'],
@@ -29,9 +29,10 @@ class Proyecto
             ':jefe_proyecto_id' => $data['jefe_proyecto_id'],
             ':pronostico' => $data['pronostico'],
             ':ingresos' => $data['ingresos'],
-            ':archivo' => $data['archivo'] ?? null,
             ':tiempo_real_horas' => $data['tiempo_real_horas']
         ]);
+
+        return $this->pdo->lastInsertId();
     }
 
     public function actualizarTiempoReal($proyecto_id)

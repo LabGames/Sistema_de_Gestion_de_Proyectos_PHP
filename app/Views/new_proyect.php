@@ -48,9 +48,9 @@
                     <tr>
                         <th colspan="2">
                             <select name="collab-asso" placeholder="Selecionar un Colaborador" required>
-                            <?php foreach ($usuarios_value as $usuario): ?>
-                                    <option value="<?= $usuario['id'] ?>">
-                                        <?= htmlspecialchars($usuario['nombre']) ?>
+                            <?php foreach ($clientes_value as $cliente): ?>
+                                    <option value="<?= $cliente['id'] ?>">
+                                        <?= htmlspecialchars($cliente['nombre_cliente']) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
