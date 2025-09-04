@@ -32,11 +32,19 @@ class ProyectController
 
     public function new_proyect()
     {
+        $proyectos_value = $this->estados->getAll();
         $tipos_value = $this->tipos->getAll();
         $estados_value = $this->estados->getAll();
         $clientes_value = $this->clientes->getAll();
         
         include __DIR__ . "/../Views/new_proyect.php";
+    }
+
+    public function listarProyectos()
+    {
+        $proyectos_value = $this->proyectos->getAll();
+        header('Content-Type: application/json');
+        echo json_encode($proyectos_value);
     }
 
     public function listarEstados()

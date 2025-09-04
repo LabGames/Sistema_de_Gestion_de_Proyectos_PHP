@@ -8,6 +8,12 @@ class Proyecto
         $this->pdo = $pdo;
     }
 
+    public function getAll()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM proyectos");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function create($data)
     {
         $sql = "INSERT INTO proyectos 
