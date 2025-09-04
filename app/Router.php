@@ -3,11 +3,12 @@ class Router
 {
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
+
     private $privateRoutes = ['Home', 
                                 'Logout', 
                                 'Dash', 
                                 'Usuarios', 
-                                'Rol',
+                                'Rol', 'Clientes',
                                 'Listar_Estados',
                                 'Listar_Tipos',
                                 'Home/Proyectos',
@@ -15,6 +16,7 @@ class Router
                                 'Home/Administrar-Colaboradores', 
                                 'Home/Administrar-Jefes-De-Proyecto'
                             ];
+
 
     public function __construct($pdo)
     {
@@ -34,11 +36,22 @@ class Router
         require_once __DIR__ . "/Controllers/UserController.php";
         require_once __DIR__ . "/Controllers/RolController.php";
         require_once __DIR__ . "/Controllers/ProyectController.php";
+
+        require_once __DIR__ . "/Controllers/ClientesController.php";
+        require_once __DIR__ . "/Controllers/ContactosController.php";
+        require_once __DIR__ . "/Controllers/GestorProyectosController.php";
+        require_once __DIR__ . "/Controllers/GestorTareasController.php";
+        
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
         $UserController = new UserController($this->pdo);
         $rolController = new RolController($this->pdo);
         $ProyectController = new ProyectController($this->pdo);
+
+        $clientesController = new ClientesController($this->pdo);
+        $contactosController = new ContactosController($this->pdo);
+        $GestorProyectosController = new GestorProyectosController($this->pdo);
+        $GestorTareasController = new GestorTareasController($this->pdo);
 
         if (in_array($url, $this->privateRoutes) && !$this->isAuthenticated()) {
             header("Location: " . BASE_URL . "/Login");
@@ -58,26 +71,69 @@ class Router
             case 'Registro':
                 $controller->index_registro();
                 break;
-            case 'Registro/Crear':
-                $controller->register();
-                break;
             case 'Home':
                 $HomeController->index();
                 break;
             case 'Dash':
                 $controller->dash();
                 break;
+            case 'GestorProyectos':
+                $GestorProyectosController->index();
+                break;
+            case 'GestorTareas':
+                $GestorTareasController->index();
+                break;
             case 'Logout':
                 $controller->logout();
                 break;
+
             case 'Usuarios':
                 $UserController->index();
                 break;
             case 'Usuarios/Listar':
                 $UserController->listar();
                 break;
+            case 'Usuarios/ObtenerUsuario':
+                $UserController->obtenerUsuario();
+                break;
             case 'Usuarios/Registrar':
-                $UserController->listar();
+                $UserController->registrar();
+                break;
+            case 'Usuarios/Actualizar':
+                $UserController->actualizar();
+                break;
+            case 'Usuarios/Eliminar':
+                $UserController->eliminar();
+                break;
+            case 'Usuarios/Activar':
+                $UserController->activar();
+                break;
+            case 'Usuarios/Inhabilitar':
+                $UserController->inhabilitar();
+                break;
+            case 'Clientes':
+                $clientesController->index();
+                break;
+            case 'Clientes/ObtenerCliente':
+                $clientesController->obtenerCliente();
+                break;
+            case 'Clientes/Listar':
+                $clientesController->listar();
+                break;
+            case 'Clientes/ListarEstados':
+                $clientesController->listarEstados();
+                break;
+            case 'Clientes/Registrar':
+                $clientesController->registrar();
+                break;
+            case 'Clientes/Actualizar':
+                $clientesController->actualizar();
+                break;
+            case 'Clientes/Eliminar':
+                $clientesController->eliminar();
+                break;
+            case 'Contactos/Listar':
+                $contactosController->listar();
                 break;
             case 'Rol/Listar':
                 $rolController->listar();

@@ -1,13 +1,16 @@
 <?php
 require_once __DIR__ . "/../Models/User.php";
+require_once __DIR__ . "/../Models/Clientes.php";
 
 class AuthController
 {
     private $user;
+    private $clientes;
 
     public function __construct($pdo)
     {
         $this->user = new User($pdo);
+        $this->clientes = new Clientes($pdo);
     }
 
     public function index()
@@ -43,78 +46,42 @@ class AuthController
 
     public function login()
     {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $email = $_POST["email"] ?? '';
-            $password = $_POST["password"] ?? '';
+        $email    = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
 
-            $user = $this->user->findByEmail($email);
+        $user = $this->user->findByEmail($email);
 
-            if ($user && password_verify($password, $user["password"])) {
-                if (session_status() === PHP_SESSION_NONE) session_start();
-                session_regenerate_id(true);
-
-                $_SESSION["user_id"] = $user["id"];
-                $_SESSION["name"]    = $user["nombre"];
-                $_SESSION["email"]   = $user["email"];
-
-                header('Content-Type: application/json');
-                echo json_encode([
-                    "success" => true,
-                    "redirect" => BASE_URL . "/Home"
-                ]);
-                exit;
-            } else {
-                $error = "Correo o contraseña incorrectos.";
-                header('Content-Type: application/json');
-                echo json_encode(["success" => false, "message" => $error]);
-                exit;
-            }
+        if ($user["estado"] == 0) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Usuario Inhabilitado",
+            ]);
+            return;
         }
-    }
+        
+        if ($user && password_verify($password, $user["password"])) {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            session_regenerate_id(true);
 
-    public function register()
-    {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $name = trim($_POST["name"]);
-            $email = trim($_POST["email"]);
-            $password = $_POST["password"];
-            $rol = 1;
-            $password_confirm = $_POST["password_confirm"];
-
-            if (strlen($password) < 8) {
-                header('Content-Type: application/json');
-                echo json_encode([
-                    "success" => false,
-                    "error" => "La contraseña debe tener al menos 8 caracteres."
-                ]);
-            } elseif ($password !== $password_confirm) {
-                header('Content-Type: application/json');
-                echo json_encode([
-                    "success" => false,
-                    "error" => "Las contraseñas no coinciden."
-                ]);
-            } elseif ($this->user->findByEmail($email)) {
-                header('Content-Type: application/json');
-                echo json_encode([
-                    "success" => false,
-                    "error" => "El correo ya está registrado."
-                ]);
-            } else {
-                $this->user->create($name, $email, $password, $rol);
-                header('Content-Type: application/json');
-                echo json_encode([
-                    "success" => true,
-                    "redirect" => BASE_URL . "/Login"
-                ]);
-                exit;
-            }
+            $_SESSION["user_id"] = $user["id"];
+            $_SESSION["name"]    = $user["nombre"];
+            $_SESSION["email"]   = $user["email"];
+            $_SESSION["estado_cliente"] = $this->clientes->estadoCliente($user["id"]);
+            echo json_encode([
+                "success" => true,
+                "redirect" => BASE_URL . "/Home"
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => "Credenciales incorrectas",
+            ]);
         }
     }
 
     public function logout()
     {
         session_destroy();
-        header('Content-Type: application/json');
         echo json_encode([
             "success" => false,
             "redirect" => BASE_URL . "/Login"

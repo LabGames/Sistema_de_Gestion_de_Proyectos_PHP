@@ -29,10 +29,10 @@
                 <div class="input-wrap">
                     <i class="fa-solid fa-envelope input-icon"></i>
                     <input
-                        name="email"
+                        id="email"
                         type="email"
                         placeholder="tu@correo.com"
-                        required />
+                         />
                 </div>
             </div>
             <div class="field">
@@ -40,10 +40,10 @@
                 <div class="input-wrap">
                     <i class="fa-solid fa-lock input-icon"></i>
                     <input
-                        name="password"
+                        id="password"
                         type="password"
                         placeholder="********"
-                        required />
+                        />
                 </div>
             </div>
             <div class="row-between">

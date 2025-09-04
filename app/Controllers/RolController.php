@@ -12,7 +12,6 @@ class RolController
 
     public function listar()
     {
-        header('Content-Type: application/json');
         echo json_encode($this->rol->getAll());
     }
 }
