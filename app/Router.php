@@ -14,7 +14,8 @@ class Router
                                 'Home/Proyectos',
                                 'Home/Proyectos/Crear-Nuevo-Proyecto', 
                                 'Home/Administrar-Colaboradores', 
-                                'Home/Administrar-Jefes-De-Proyecto'
+                                'Home/Administrar-Jefes-De-Proyecto',
+                                'Panel/GestorProyectos',
                             ];
 
 
@@ -41,6 +42,7 @@ class Router
         require_once __DIR__ . "/Controllers/ContactosController.php";
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
+        require_once __DIR__ . "/Controllers/pruebaControles.php";
         
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
@@ -52,6 +54,7 @@ class Router
         $contactosController = new ContactosController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
         $GestorTareasController = new GestorTareasController($this->pdo);
+        $pruebaControles = new pruebaControles($this->pdo);
 
         if (in_array($url, $this->privateRoutes) && !$this->isAuthenticated()) {
             header("Location: " . BASE_URL . "/Login");
@@ -159,6 +162,9 @@ class Router
             case 'Home/Administrar-Jefes-De-Proyecto':
                 $controller->admin_manager();
                 break;
+            case 'Panel/GestorProyectos':
+                $pruebaControles->index();
+                break;    
             default:
                 echo "404 - Página no encontrada";
         }

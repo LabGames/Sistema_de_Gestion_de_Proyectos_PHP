@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Elementos decorativos de fondo */
+.bg-decoration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.bg-shapes {
+    position: absolute;
+    opacity: 0.1;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -100px;
+    right: -100px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    bottom: -50px;
+    left: -50px;
+    transform: rotate(45deg);
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    width: 150px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 75px;
+    top: 20%;
+    right: 10%;
+    transform: rotate(-20deg);
+    animation: float 10s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+.header-left h1 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.breadcrumb {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.logout-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    height: 220px;
+    min-height: 220px;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+    width: 100%;
+    height: 60%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 20px;
+    height: 40%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Imágenes de fondo para cada tarjeta */
+/* Puedes reemplazar estos URLs con tus propias imágenes */
+
+.card-proyectos .card-image {
+    /* Pon tu imagen aquí - ejemplo: background-image: url('images/proyectos.jpg'); */
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23334155"/><g fill="%23475569"><rect x="20" y="40" width="60" height="220" rx="4"/><rect x="100" y="60" width="60" height="200" rx="4"/><rect x="180" y="30" width="60" height="230" rx="4"/><rect x="260" y="80" width="60" height="180" rx="4"/><rect x="340" y="50" width="60" height="210" rx="4"/></g></svg>');
+}
+
+.card-tareas .card-image {
+    /* Pon tu imagen aquí - ejemplo: background-image: url('images/tareas.jpg'); */
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23374151"/><g fill="%234b5563"><rect x="50" y="50" width="300" height="20" rx="2"/><rect x="50" y="90" width="280" height="20" rx="2"/><rect x="50" y="130" width="320" height="20" rx="2"/><rect x="50" y="170" width="250" height="20" rx="2"/><rect x="50" y="210" width="290" height="20" rx="2"/></g></svg>');
+}
+
+.card-colaboradores .card-image {
+    /* Pon tu imagen aquí - ejemplo: background-image: url('images/colaboradores.jpg'); */
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23365314"/><g fill="%234ade80"><circle cx="120" cy="100" r="30"/><circle cx="200" cy="120" r="35"/><circle cx="280" cy="110" r="30"/><circle cx="160" cy="180" r="25"/><circle cx="240" cy="200" r="28"/></g></svg>');
+}
+
+.card-reportes .card-image {
+    /* Pon tu imagen aquí - ejemplo: background-image: url('images/reportes.jpg'); */
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23422006"/><g fill="%23fbbf24"><rect x="60" y="60" width="80" height="180" rx="4"/><rect x="160" y="100" width="80" height="140" rx="4"/><rect x="260" y="80" width="80" height="160" rx="4"/></g></svg>');
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .header-left h1 {
+        font-size: 2rem;
+    }
+    
+    .welcome-text {
+        font-size: 1.1rem;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        gap: 20px;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+    
+    .dashboard-card {
+        height: 200px;
+        min-height: 200px;
+    }
+    
+    .user-profile {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .logout-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header-left h1 {
+        font-size: 1.8rem;
+    }
+    
+    .welcome-text {
+        font-size: 1rem;
+    }
+    
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+    
+    .dashboard-grid {
+        gap: 15px;
+    }
+    
+    .dashboard-card {
+        height: 180px;
+        min-height: 180px;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+    
+    .card-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .card-overlay {
+        padding: 15px;
+    }
+    
+    .profile-img {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .dashboard-grid {
+        max-width: 700px;
+        gap: 25px;
+    }
+    
+    .dashboard-card {
+        height: 210px;
+        min-height: 210px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .dashboard-grid {
+        max-width: 900px;
+        gap: 35px;
+    }
+    
+    .dashboard-card {
+        height: 240px;
+        min-height: 240px;
+    }
+}
