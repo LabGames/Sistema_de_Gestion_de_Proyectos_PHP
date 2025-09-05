@@ -112,4 +112,14 @@ class User
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
+
+    public function getByRolId($rol_id)
+    {
+        $stmt = $this->pdo->prepare("SELECT id, nombre FROM usuarios WHERE rol_id = :rol_id");
+        $stmt->bindParam(":rol_id", $rol_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

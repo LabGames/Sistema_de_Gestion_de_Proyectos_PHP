@@ -59,7 +59,7 @@
                 <span>Entrar</span>
             </button>
             <p class="alt">
-                ¿No tienes cuenta? <a class="link" href="">Crear cuenta</a>
+                ¿No tienes cuenta? <a class="link" href="<?= BASE_URL ?>/Registro">Crear cuenta</a>
             </p>
         </form>
     </section>

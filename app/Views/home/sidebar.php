@@ -24,12 +24,12 @@
     <div class="menu-sidebar">
         <div class="menu-sidebar-title">General</div>
 
-        <a href="#" class="sidebar-menu-item active">
+        <a href="<?= BASE_URL ?>/Home" class="sidebar-menu-item active">
             <i class="fa-solid fa-house"></i>
             <span class="sidebar-text">Dashboard</span>
         </a>
 
-        <a href="#" class="sidebar-menu-item">
+        <a href="<?= BASE_URL ?>/Home/Proyectos" class="sidebar-menu-item">
             <i class="fa-solid fa-list"></i>
             <span class="sidebar-text">Proyectos</span>
         </a>

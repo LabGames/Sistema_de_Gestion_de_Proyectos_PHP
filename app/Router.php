@@ -3,7 +3,19 @@ class Router
 {
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
-    private $privateRoutes = ['Home', 'Logout', '/Dash', '/GestorProyectos', '/GestorTareas', 'Usuarios', 'Rol', 'Clientes'];
+
+    private $privateRoutes = ['Home', 
+                                'Logout', 
+                                'Dash', 
+                                'Usuarios', 
+                                'Rol', 'Clientes',
+                                'Listar_Estados',
+                                'Listar_Tipos',
+                                'Home/Proyectos',
+                                'Home/Proyectos/Crear-Nuevo-Proyecto', 
+                                'Home/Administrar-Colaboradores', 
+                                'Home/Administrar-Jefes-De-Proyecto'
+                            ];
 
 
     public function __construct($pdo)
@@ -23,14 +35,19 @@ class Router
         require_once __DIR__ . "/Controllers/HomeController.php";
         require_once __DIR__ . "/Controllers/UserController.php";
         require_once __DIR__ . "/Controllers/RolController.php";
+        require_once __DIR__ . "/Controllers/ProyectController.php";
+
         require_once __DIR__ . "/Controllers/ClientesController.php";
         require_once __DIR__ . "/Controllers/ContactosController.php";
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
+        
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
         $UserController = new UserController($this->pdo);
         $rolController = new RolController($this->pdo);
+        $ProyectController = new ProyectController($this->pdo);
+
         $clientesController = new ClientesController($this->pdo);
         $contactosController = new ContactosController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
@@ -121,13 +138,25 @@ class Router
             case 'Rol/Listar':
                 $rolController->listar();
                 break;
-            case 'CreateNewProyect':
-                $controller->new_proyect();
+            case 'Home/Proyectos/Crear-Nuevo-Proyecto':
+                $ProyectController->new_proyect();
                 break;
-            case 'ManageCollaborators':
+            case 'Listar_Estados':
+                $ProyectController->listarEstados();
+                break;
+            case 'Listar_Tipos':
+                $ProyectController->listarTipos();
+                break;
+            case 'Guardando_Proyecto':
+                $ProyectController->store();
+                break;
+            case 'Home/Proyectos':
+                $ProyectController->index();
+                break;
+            case 'Home/Administrar-Colaboradores':
                 $controller->admin_collab();
                 break;
-            case 'ManageManagers':
+            case 'Home/Administrar-Jefes-De-Proyecto':
                 $controller->admin_manager();
                 break;
             default:
