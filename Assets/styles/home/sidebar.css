@@ -214,3 +214,8 @@
   .sidebar-brand{ margin-bottom:4px; }
 }
 
+/* Modo Light */
+
+body.light-mode .sidebar{
+  background: #ffffff;
+}
