@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/2.3.3/js/dataTables.min.js"></script>
 <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/usuarios/usuarios.css">
 <script src="<?= BASE_URL ?>/Assets/js/usuarios/usuarios.js"></script>
 <?php include __DIR__ . "/modal.php"; ?>
