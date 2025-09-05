@@ -25,6 +25,7 @@ class ProyectController
     public function index()
     {
         $this->proyectos->actualizarTodosLosProyectos();
+        $proyectos = $this->proyectos->getAll();
 
         $view = __DIR__ . "/../Views/proyects/index.php";
         include __DIR__ . "/../Views/home/index.php";
@@ -76,11 +77,6 @@ class ProyectController
             $fecha_fin = $_POST['end_date'];
             $tiempo_est = (strtotime($fecha_fin) - strtotime($fecha_inicio)) / 3600;
 
-            $archivo = null;
-            if (isset($_FILES['project_files']) && $_FILES['project_files']['error'][0] == 0) {
-                $archivo = file_get_contents($_FILES['project_files']['tmp_name'][0]);
-            }
-
             $data = [
                 'nombre' => $_POST['project_name'],
                 'cliente_id' => $_POST['collab-asso'],
@@ -92,7 +88,6 @@ class ProyectController
                 'jefe_proyecto_id' => $_SESSION['user_id'],
                 'pronostico' => $_POST['forecast_comment'],
                 'ingresos' => $_POST['estimated_income'],
-                'archivo' => $archivo
             ];
 
             $save = $this->proyectos->create($data);

@@ -98,12 +98,6 @@
                         <th colspan="2"><input type="number" name="estimated_income" placeholder="Ingrese los ingresos estimados" required></th>
                     </tr>
                     <tr>
-                        <th colspan="2"><a class="mini-title">Adjuntar Archivos:</a></th>
-                    </tr>
-                    <tr>
-                        <th colspan="2"><input type="file" name="project_files[]" accept=".pdf,.docx,.xlsx" placeholder="Ingrese un archivo" multiple></th>
-                    </tr>
-                    <tr>
                         <th colspan="2"><button type="submit" class="btn-style">Registrar Proyecto</button></th>
                     </tr>
                 </table>
