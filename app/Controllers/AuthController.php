@@ -66,6 +66,7 @@ class AuthController
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["name"]    = $user["nombre"];
             $_SESSION["email"]   = $user["email"];
+            $_SESSION["rol_id"]   = $user["rol_id"];
             $_SESSION["estado_cliente"] = $this->clientes->estadoCliente($user["id"]);
             echo json_encode([
                 "success" => true,
