@@ -1,3 +1,7 @@
+<script src="<?= BASE_URL ?>/Assets/js/tareas/tareas.js"></script> 
+    <script src="<?= BASE_URL ?>/Assets/js/tareas/mis_tareas.js"></script>
+    <script src="<?= BASE_URL ?>/Assets/js/tareas/admin.js"></script>
+
 <ul class="nav nav-tabs" id="miTab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">Asignar Tareas</button>
