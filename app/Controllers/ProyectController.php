@@ -25,7 +25,27 @@ class ProyectController
     public function index()
     {
         $this->proyectos->actualizarTodosLosProyectos();
-        $proyectos = $this->proyectos->getAll();
+
+       $filters = [
+            'search_proyect' => $_GET['search_proyect'] ?? '',
+            'filter_state'   => $_GET['filter_state'] ?? '',
+            'state'          => $_GET['state'] ?? ''
+        ];
+
+        $proyectos = $this->proyectos->getAll($filters);
+
+        $estados_value = $this->estados->getAll();
+        $tipos_value = $this->tipos->getAll();
+
+        $map_estados = [];
+        foreach ($estados_value as $estado) {
+            $map_estados[$estado['id']] = $estado['nombre'];
+        }
+
+        $map_tipos = [];
+        foreach ($tipos_value as $tipo) {
+            $map_tipos[$tipo['id']] = $tipo['nombre'];
+        }
 
         $view = __DIR__ . "/../Views/proyects/index.php";
         include __DIR__ . "/../Views/home/index.php";

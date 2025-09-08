@@ -8,11 +8,31 @@ class Proyecto
         $this->pdo = $pdo;
     }
 
-    public function getAll()
-    {
-        $stmt = $this->pdo->query("SELECT * FROM proyectos");
+   public function getAll($filters = []) {
+        $sql = "SELECT * FROM proyectos WHERE 1=1";
+        $params = [];
+
+        if (!empty($filters['search_proyect'])) {
+            $sql .= " AND nombre LIKE ?";
+            $params[] = "%" . $filters['search_proyect'] . "%";
+        }
+
+        if (!empty($filters['filter_state'])) {
+            $sql .= " AND estado_id = ?";
+            $params[] = $filters['filter_state'];
+        }
+
+        if (!empty($filters['state'])) {
+            $sql .= " AND fecha_inicio = ?";
+            $params[] = $filters['state'];
+        }
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     public function create($data)
     {
