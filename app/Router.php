@@ -3,7 +3,7 @@ class Router
 {
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
-    private $privateRoutes = ['Home', 'Logout', '/Dash', '/GestorProyectos', '/GestorTareas', 'Usuarios', 'Rol'];
+    private $privateRoutes = ['Home', 'Logout', '/Dash', '/GestorProyectos', '/GestorTareas', '/ColabGes', 'Usuarios', 'Rol'];
 
 
     public function __construct($pdo)
@@ -25,12 +25,14 @@ class Router
         require_once __DIR__ . "/Controllers/RolController.php";
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
+        require_once __DIR__ . "/Controllers/GestorColabController.php";
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
         $UserController = new UserController($this->pdo);
         $rolController = new RolController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
         $GestorTareasController = new GestorTareasController($this->pdo);
+        $GestorColabController = new GestorColabController($this->pdo);
 
         if (in_array($url, $this->privateRoutes) && !$this->isAuthenticated()) {
             header("Location: " . BASE_URL . "/Login");
@@ -62,9 +64,39 @@ class Router
             case 'GestorTareas':
                 $GestorTareasController->index();
                 break;
+            case 'ColabGes':
+                $GestorColabController->index();
+                break;
             case 'Logout':
                 $controller->logout();
                 break;
+
+
+            case 'GestorTareas/Listar':
+                $GestorTareasController->listar();
+                break;
+            case 'GestorTareas/MisTareas':
+                $GestorTareasController->misTareas();
+                break;
+            case 'GestorTareas/Asignar':
+                $GestorTareasController->asignar();
+                break;
+            case 'GestorTareas/Completar':
+                $GestorTareasController->completar();
+                break;
+            case 'GestorTareas/AdminList':
+                $GestorTareasController->adminList();
+                break;
+            case 'GestorTareas/Crear':
+                $GestorTareasController->crear();
+                break;
+                case 'GestorTareas/Eliminar':
+                $GestorTareasController->eliminar();
+                break;
+
+
+
+ 
 
             case 'Usuarios':
                 $UserController->index();

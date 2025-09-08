@@ -30,7 +30,12 @@
     
     <script src="<?= BASE_URL ?>/Assets/js/login.js"></script>
 
-    <script src="<?= BASE_URL ?>/Assets/js/script.js"></script>
+    
+    <script src="<?= BASE_URL ?>/Assets/js/tareas/tareas.js"></script> 
+    <script src="<?= BASE_URL ?>/Assets/js/tareas/mis_tareas.js"></script>
+    <script src="<?= BASE_URL ?>/Assets/js/tareas/admin.js"></script>
+    
+
 
     <script>
         const BASE_URL = "<?= BASE_URL ?>";

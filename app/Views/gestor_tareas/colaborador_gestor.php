@@ -1,184 +1,157 @@
-<div class="container mt-4">
-    <h2 class="mb-4">Gestor de Tareas</h2>
+<ul class="nav nav-tabs" id="miTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">Asignar Tareas</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">Mis Tareas</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">Admin</button>
+  </li>
+</ul>
 
-    <ul class="nav nav-tabs" id="miTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button"
-                role="tab">Asignar Tareas</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button"
-                role="tab">Mis Tareas</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button"
-                role="tab">Panel Admin</button>
-        </li>
-    </ul>
+<div class="tab-content mt-3" id="miTabContent">
 
-    <div class="tab-content mt-3" id="miTabContent">
-        <div class="tab-pane fade show active" id="tab1" role="tabpanel">
-            <div class="card p-4 shadow-lg rounded-4">
-                <h4 class="mb-3 text-center">📋 Tareas Disponibles</h4>
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="🔍 Buscar tarea..." id="search-assign-tasks">
-                </div>
-                <p class="text-muted text-center">Selecciona una tarea para comenzar a trabajar en ella.</p>
-                <ul class="list-group" id="assign-task-list">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Reforestar Bosque de Jicamarca
-                        <button class="btn btn-sm btn-primary assign-task-btn">Asignar</button>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Limpiar Muros Básicos
-                        <button class="btn btn-sm btn-primary assign-task-btn">Asignar</button>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Campaña contra la Tala de Árboles
-                        <button class="btn btn-sm btn-primary assign-task-btn">Asignar</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="tab2" role="tabpanel">
-            <div class="card p-4 shadow-lg rounded-4">
-                <h4 class="mb-3 text-center">✅ Mis Tareas Asignadas</h4>
-                <div class="row text-center mb-4">
-                    <div class="col">
-                        <div class="p-3 bg-secondary rounded-3 text-white">
-                            <h5 id="total-tareas">0</h5>
-                            <small>Tareas Asignadas</small>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="p-3 bg-success rounded-3 text-white">
-                            <h5 id="tareas-completadas">0</h5>
-                            <small>Tareas Completadas</small>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="p-3 bg-warning rounded-3 text-white">
-                            <h5 id="tareas-pendientes">0</h5>
-                            <small>Tareas Pendientes</small>
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-group" id="my-task-list">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" data-task-id="1">
-                            <label class="form-check-label" for="task-1">Rescatar Animales</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <span class="badge bg-warning me-2 status-badge">En progreso</span>
-                            <div class="action-buttons">
-                                <button class="btn btn-sm btn-info text-white send-proofs-btn">Enviar Pruebas</button>
-                                <button class="btn btn-sm btn-info text-white view-proofs-btn d-none">Ver Pruebas</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" data-task-id="2" checked>
-                            <label class="form-check-label" for="task-2">Campaña contra la Tala</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <span class="badge bg-success me-2 status-badge">Completada</span>
-                            <div class="action-buttons">
-                                <button class="btn btn-sm btn-info text-white send-proofs-btn d-none">Enviar Pruebas</button>
-                                <button class="btn btn-sm btn-info text-white view-proofs-btn">Ver Pruebas</button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="mt-4 text-center">
-                    <p class="text-muted">Progreso:</p>
-                    <div style="width: 250px; height: 250px; margin: auto;">
-                        <canvas id="task-progress-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="tab3" role="tabpanel">
-            <div class="card p-4 shadow-lg rounded-4">
-                <h4 class="mb-3 text-center">⚙️ Panel Admin</h4>
-                <p class="text-muted text-center">Este panel es para crear y gestionar todas las tareas del sistema.</p>
-                <div class="mb-3">
-                    <button class="btn btn-success w-100 mb-3" data-bs-toggle="modal" data-bs-target="#nuevaTareaModal">➕ Crear Nueva Tarea</button>
-                </div>
-                <table class="table table-hover align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Tarea</th>
-                            <th>Colaboradores</th>
-                            <th>Fecha Límite</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Reforestar Bosque</td>
-                            <td>Juan, María</td>
-                            <td>20/09/2025</td>
-                            <td>
-                                <button class="btn btn-sm btn-warning">✏️ Editar</button>
-                                <button class="btn btn-sm btn-danger">🗑️ Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Limpiar Muros</td>
-                            <td>Carlos, Ana</td>
-                            <td>18/09/2025</td>
-                            <td>
-                                <button class="btn btn-sm btn-warning">✏️ Editar</button>
-                                <button class="btn btn-sm btn-danger">🗑️ Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+    <div class="card p-4 shadow-sm">
+      <h4 class="mb-3">Asignar Tareas Disponibles</h4>
+      <input type="text" id="search-assign" class="form-control mb-3" placeholder="🔍 Buscar tarea (Asignar)...">
+      <ul id="assign-task-list" class="list-group"></ul>
     </div>
+  </div>
+
+  <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+    <div class="card p-4 shadow-sm">
+      <h4 class="mb-3">Mis Tareas</h4>
+      <input type="text" id="search-my" class="form-control mb-3" placeholder="🔍 Buscar tarea (Mis Tareas)...">
+      <div class="d-flex gap-3 mb-3 flex-wrap" id="my-task-cards"></div>
+      <ul id="my-task-list" class="list-group mb-3"></ul>
+      <div class="text-center" style="max-width:360px;margin:auto;">
+        <canvas id="task-progress-chart" width="300" height="300" aria-label="Progreso de tareas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+    <div class="card p-4 shadow-sm">
+      <h4 class="mb-3">Gestión de Tareas (CRUD)</h4>
+      <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalCrear">
+        Crear Nueva Tarea
+      </button>
+      <input type="text" id="search-admin" class="form-control mb-3" placeholder="🔍 Buscar tarea (Admin)...">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Colaborador</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="admin-task-list">
+            <tr>
+              <th scope="row">1</th>
+              <td>Diseño UI/UX</td>
+              <td>Ana López</td>
+              <td>Pendiente</td>
+              <td>
+                <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#detallesModal">Ver</button>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Eliminar</button>
+              </td>
+            </tr>
+             <tr>
+              <th scope="row">2</th>
+              <td>Desarrollo Backend</td>
+              <td>Carlos Ruiz</td>
+              <td>En Progreso</td>
+              <td>
+                <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#detallesModal">Ver</button>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Eliminar</button>
+              </td>
+            </tr>
+             <tr>
+              <th scope="row">3</th>
+              <td>Pruebas QA</td>
+              <td>Sofía Castro</td>
+              <td>Completada</td>
+              <td>
+                <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#detallesModal">Ver</button>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="modal fade" id="nuevaTareaModal" tabindex="-1" aria-labelledby="nuevaTareaModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="nuevaTareaModalLabel">Crear Nueva Tarea</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="nombreTarea" class="form-label">Nombre de la Tarea</label>
-                        <input type="text" class="form-control" id="nombreTarea"
-                            placeholder="Escribe el nombre de la tarea">
-                    </div>
-                    <div class="mb-3">
-                        <label for="descripcionTarea" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcionTarea" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="colaboradores" class="form-label">Asociar Colaboradores</label>
-                        <select class="form-select" id="colaboradores" multiple="multiple">
-                            <option value="1">Juan Pérez</option>
-                            <option value="2">María Gómez</option>
-                            <option value="3">Carlos Díaz</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="fechaLimite" class="form-label">Fecha Límite</label>
-                        <input type="date" class="form-control" id="fechaLimite">
-                    </div>
-                    <button type="submit" class="btn btn-gradient w-100">Crear Tarea</button>
-                </form>
-            </div>
+<div class="modal fade" id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <form id="formCrear">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalCrearLabel">Nueva Tarea</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="tareaNombre" class="form-label">Nombre de la tarea</label>
+            <input type="text" id="tareaNombre" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="tareaDetalle" class="form-label">Detalle</label>
+            <textarea id="tareaDetalle" class="form-control" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="tareaColaborador" class="form-label">Colaborador</label>
+            <input type="text" id="tareaColaborador" class="form-control" required>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="tareaInicio" class="form-label">Fecha de inicio</label>
+              <input type="date" id="tareaInicio" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="tareaLimite" class="form-label">Fecha límite</label>
+              <input type="date" id="tareaLimite" class="form-control" required>
+            </div>
+          </div>
+          <input type="hidden" id="tareaId">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="crearBtn" class="btn btn-primary">Crear Tarea</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detallesModalLabel">Detalles de la Tarea</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Nombre:</strong> <span id="modalNombreDetalle"></span></p>
+        <p><strong>Colaborador:</strong> <span id="modalColaboradorDetalle"></span></p>
+        <p><strong>Detalle de la tarea:</strong> <span id="modalDetalleDetalle"></span></p>
+        <p><strong>Fecha de inicio:</strong> <span id="modalInicioDetalle"></span></p>
+        <p><strong>Fecha límite:</strong> <span id="modalLimiteDetalle"></span></p>
+        <p><strong>Estado:</strong> <span id="modalEstadoDetalle"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
