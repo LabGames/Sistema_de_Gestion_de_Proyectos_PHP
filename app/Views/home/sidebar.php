@@ -41,8 +41,15 @@
 
         <div class="sidebar-separator"></div>
 
-        <div class="menu-sidebar-title">Cuenta</div>
-
+        <div class="menu-sidebar-title">Configuracion</div>
+        <a href="<?= BASE_URL ?>/Usuarios" class="sidebar-menu-item">
+            <i class="fa-solid fa-user"></i>
+            <span class="sidebar-text">Usuarios</span>
+        </a>
+        <a href="<?= BASE_URL ?>/Clientes" class="sidebar-menu-item">
+        <i class="fa-solid fa-users"></i>
+            <span class="sidebar-text">Clientes</span>
+        </a>
         <a href="#" class="sidebar-menu-item">
             <i class="fa-solid fa-gear"></i>
             <span class="sidebar-text">Ajustes</span>

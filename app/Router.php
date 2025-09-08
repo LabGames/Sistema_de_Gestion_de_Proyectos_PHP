@@ -5,18 +5,22 @@ class Router
     private $publicRoutes = ['Login', 'Registro', ''];
 
 
-    private $privateRoutes = ['Home', 
-                                'Logout', 
-                                'Dash', 
-                                'Usuarios', 
-                                'Rol', 'Clientes',
-                                'Listar_Estados',
-                                'Listar_Tipos',
-                                'Home/Proyectos',
-                                'Home/Proyectos/Crear-Nuevo-Proyecto', 
-                                'Home/Administrar-Colaboradores', 
-                                'Home/Administrar-Jefes-De-Proyecto'
-                            ];
+    private $privateRoutes = [
+        'Home',
+        'Logout',
+        'Dash',
+        'Usuarios',
+        'Rol',
+        'Clientes',
+        'Contactos',
+        'Listar_Estados',
+        'Listar_Tipos',
+        'Home/Proyectos',
+        'Home/Proyectos/Crear-Nuevo-Proyecto',
+        'Home/Administrar-Colaboradores',
+        'Home/Administrar-Jefes-De-Proyecto',
+        'Panel/GestorProyectos',
+    ];
 
 
     public function __construct($pdo)
@@ -43,6 +47,9 @@ class Router
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
 
+        require_once __DIR__ . "/Controllers/pruebaControles.php";
+
+
         $controller = new AuthController($this->pdo);
         $HomeController = new HomeController($this->pdo);
         $UserController = new UserController($this->pdo);
@@ -53,7 +60,8 @@ class Router
         $contactosController = new ContactosController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
         $GestorTareasController = new GestorTareasController($this->pdo);
-        
+        $pruebaControles = new pruebaControles($this->pdo);
+
 
         if (in_array($url, $this->privateRoutes) && !$this->isAuthenticated()) {
             header("Location: " . BASE_URL . "/Login");
@@ -91,8 +99,6 @@ class Router
             case 'Logout':
                 $controller->logout();
                 break;
-
-
             case 'GestorTareas/Listar':
                 $GestorTareasController->listar();
                 break;
@@ -114,11 +120,6 @@ class Router
                 case 'GestorTareas/Eliminar':
                 $GestorTareasController->eliminar();
                 break;
-
-
-
- 
-
             case 'Usuarios':
                 $UserController->index();
                 break;
@@ -164,6 +165,9 @@ class Router
             case 'Clientes/Eliminar':
                 $clientesController->eliminar();
                 break;
+            case 'Contactos':
+                $contactosController->index();
+                break;
             case 'Contactos/Listar':
                 $contactosController->listar();
                 break;
@@ -190,6 +194,9 @@ class Router
                 break;
             case 'Home/Administrar-Jefes-De-Proyecto':
                 $controller->admin_manager();
+                break;
+            case 'Panel/GestorProyectos':
+                $pruebaControles->index();
                 break;
             default:
                 echo "404 - Página no encontrada";

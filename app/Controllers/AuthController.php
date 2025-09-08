@@ -50,6 +50,7 @@ class AuthController
         $password = $_POST['password'] ?? null;
 
         $user = $this->user->findByEmail($email);
+        $cliente = $this->clientes->findByUserId($user["id"]);
 
         if ($user["estado"] == 0) {
             echo json_encode([
@@ -58,7 +59,7 @@ class AuthController
             ]);
             return;
         }
-        
+
         if ($user && password_verify($password, $user["password"])) {
             if (session_status() === PHP_SESSION_NONE) session_start();
             session_regenerate_id(true);
@@ -66,7 +67,12 @@ class AuthController
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["name"]    = $user["nombre"];
             $_SESSION["email"]   = $user["email"];
+            $_SESSION["rol_id"]   = $user["rol_id"];
             $_SESSION["estado_cliente"] = $this->clientes->estadoCliente($user["id"]);
+            if ($cliente) {
+                $_SESSION["cliente_id"] = $cliente["id"];
+            }
+            
             echo json_encode([
                 "success" => true,
                 "redirect" => BASE_URL . "/Home"

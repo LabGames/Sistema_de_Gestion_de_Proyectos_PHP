@@ -11,6 +11,11 @@ class ContactosController
         $this->contactos = new Contactos($pdo);
     }
 
+    public function index()
+    {
+        $view = __DIR__ . "/../Views/contactos/index.php";
+        include __DIR__ . "/../Views/home/index.php";
+    }
 
     public function listar()
     {
