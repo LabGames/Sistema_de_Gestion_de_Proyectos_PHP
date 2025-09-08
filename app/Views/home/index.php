@@ -14,6 +14,7 @@
     <script>
         const BASE_URL = "<?= BASE_URL ?>";
         const userId = <?= json_encode($_SESSION["user_id"] ?? null); ?>;
+        const clienteId = <?= json_encode($_SESSION["cliente_id"] ?? null); ?>;
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>/Assets/js/login.js"></script>

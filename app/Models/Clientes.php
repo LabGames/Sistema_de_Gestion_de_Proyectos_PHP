@@ -26,6 +26,13 @@ class Clientes
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function findByUserId($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM clientes WHERE user_id = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function create($nombre_cliente, $empresa, $rubro, $contacto, $estado, $user_id)
     {
         $sql = "INSERT INTO clientes (nombre_cliente, empresa, rubro, contacto_principal, estado_id, user_id) 
