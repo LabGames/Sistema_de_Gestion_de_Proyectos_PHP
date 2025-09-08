@@ -22,7 +22,7 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create($name, $rol, $email, $password, $estado)
+    public function create0($name, $rol, $email, $password, $estado)
     {
         $sql = "INSERT INTO usuarios (nombre, rol_id, email, password, estado) VALUES (:nombre, :rol, :email, :password, :estado)";
         $stmt = $this->pdo->prepare($sql);
@@ -34,7 +34,26 @@ class User
             ':password' => $password,
             ':estado'   => $estado
         ]);
+
     }
+
+    public function create($name, $rol, $email, $password, $estado)
+    {
+        $sql = "INSERT INTO usuarios (nombre, rol_id, email, password, estado) 
+            VALUES (:nombre, :rol, :email, :password, :estado)";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([
+            ':nombre'   => $name,
+            ':rol'      => $rol,
+            ':email'    => $email,
+            ':password' => $password,
+            ':estado'   => $estado
+        ]);
+
+        return $this->pdo->lastInsertId();
+    }
+
 
     public function update($id, $name, $rol, $email, $password = null)
     {
@@ -93,4 +112,14 @@ class User
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
+
+    public function getByRolId($rol_id)
+    {
+        $stmt = $this->pdo->prepare("SELECT id, nombre FROM usuarios WHERE rol_id = :rol_id");
+        $stmt->bindParam(":rol_id", $rol_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

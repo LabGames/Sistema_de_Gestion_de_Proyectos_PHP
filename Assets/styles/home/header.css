@@ -56,17 +56,115 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.06);
   cursor: pointer;
+  transition: background 0.2s ease;
 }
+
+.user-chip:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .user-chip img {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   object-fit: cover;
 }
-.user-chip:hover {
-  background: rgba(255, 255, 255, 0.1);
+
+.user-chip span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e9eefb;
+}
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #1c2130;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  list-style: none;
+  padding: 6px 0;
+  min-width: 180px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  display: none;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.dropdown li a,
+.dropdown li button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: #e9eefb;
+  font-size: 14px;
+  text-decoration: none;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.dropdown li a i,
+.dropdown li button i {
+  font-size: 14px;
+  width: 18px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.dropdown li a:hover,
+.dropdown li button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+#toggle-user-menu:checked ~ .dropdown {
+  display: block;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+#toggle-user-menu:checked + .user-chip .chevron {
+  transform: rotate(180deg);
+}
+
+
+
+/* Modo Light */
+
+body.light-mode .topbar {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  color: #1e1e2f;
+}
+
+body.light-mode .dropdown {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+body.light-mode .dropdown li a,
+body.light-mode .dropdown li button {
+  color: #1e1e2f;
+}
+
+body.light-mode .dropdown li a:hover,
+body.light-mode .dropdown li button:hover {
+  background: rgba(0,0,0,0.06);
 }

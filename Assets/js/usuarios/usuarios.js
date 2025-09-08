@@ -91,6 +91,7 @@ function listar() {
           ],
           language: {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+            emptyTable: "No hay datos registrados",
           },
         });
       }
@@ -132,24 +133,6 @@ function registrarUsuario() {
   const email = document.getElementById("correo").value.trim();
   const password = document.getElementById("password").value.trim();
 
-  if (!name || !rol || !email || !password) {
-    Swal.fire({
-      icon: "warning",
-      title: "Campos incompletos",
-      text: "Todos los campos son obligatorios.",
-      background: "#1e293b",
-      color: "#e2e8f0",
-      iconColor: "#facc15",
-      confirmButtonColor: "#6366f1",
-      customClass: {
-        title: "swal-title",
-        popup: "swal-popup",
-        confirmButton: "swal-confirm",
-      },
-    });
-    return;
-  }
-
   const formData = new FormData();
   formData.append("name", name);
   formData.append("rol", rol);
@@ -171,21 +154,27 @@ function registrarUsuario() {
           color: "#e2e8f0",
           iconColor: "#22c55e",
           confirmButtonColor: "#6366f1",
-          customClass: {
-            title: "swal-title",
-            popup: "swal-popup",
-            confirmButton: "swal-confirm",
-          },
         }).then(() => {
           document.getElementById("formRegistrarUsuario").reset();
           listar();
         });
       } else {
-        console.log("Error: " + data.message);
+        let erroresHtml = "";
+        if (Array.isArray(data.message)) {
+          erroresHtml = "<div><ul style='text-align:center'></div>";
+          data.message.forEach((errores) => {
+            erroresHtml += `<li>${errores}</li>`;
+          });
+          erroresHtml += "</ul>";
+        } else {
+          erroresHtml = data.message;
+        }
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: data.message || "No se pudo registrar el usuario",
+          title: "Campos incompletos",
+          html: erroresHtml,
+          background: "#1e293b",
+          color: "#e2e8f0",
           confirmButtonColor: "#ef4444",
         });
       }
