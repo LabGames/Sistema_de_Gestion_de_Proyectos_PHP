@@ -78,7 +78,7 @@ function listarEstadosModal() {
     });
 }
 
-function smartWizard() {
+function sWizard() {
   $("#smartwizard").smartWizard({
     theme: "circles",
     autoAdjustHeight: false,
