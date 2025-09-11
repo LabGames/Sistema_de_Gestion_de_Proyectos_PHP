@@ -10,7 +10,7 @@ class Tarea {
     {
         $sql = "SELECT t.*, e.nombre AS estado_nombre
             FROM tareas t
-            INNER JOIN estados_tareas e ON t.estado_id = e.id";
+            INNER JOIN estados_tarea e ON t.estado_id = e.id";
 
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
