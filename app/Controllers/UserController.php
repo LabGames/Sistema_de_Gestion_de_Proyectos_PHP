@@ -64,6 +64,10 @@ class UserController
         if (empty($password)) {
             $errores[] = "La contraseña es obligatoria";
         }
+        $userVerify = $this->user->findByEmail($email);
+        if ($userVerify) {
+            $errores[] = "Este correo ya esta registrado";
+        }
 
         if (!empty($errores)) {
             echo json_encode([
@@ -98,10 +102,25 @@ class UserController
         $email    = $_POST['email'] ?? null;
         $password = $_POST['password'] ?? null;
 
-        if (!$id || !$name || !$rol || !$email) {
+        $errores = [];
+
+        if (empty($id)) {
+            $errores[] = "No se encontro el id";
+        }
+        if (empty($name)) {
+            $errores[] = "El nombre es obligatorio";
+        }
+        if (empty($rol)) {
+            $errores[] = "El rol es obligatorio";
+        }
+        if (empty($email)) {
+            $errores[] = "El correo es obligatorio";
+        }
+
+        if (!empty($errores)) {
             echo json_encode([
                 "success" => false,
-                "message" => "Faltan datos obligatorios"
+                "message" => $errores
             ]);
             return;
         }

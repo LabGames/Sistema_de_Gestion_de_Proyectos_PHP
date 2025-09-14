@@ -1,12 +1,21 @@
 <?php
 $nombre = $_SESSION['name'] ?? 'Usuario';
+$currentRoute = str_replace(BASE_URL.'/', '', $_SERVER['REQUEST_URI']); 
+$titles = [
+    'Home' => 'Dashboard',
+    'Home/Proyectos' => 'Proyectos',
+    'Clientes' => 'Clientes',
+    'Usuarios' => 'Usuarios',
+    'Perfil' => 'Mi Perfil',
+];
+$pageTitle = $titles[$currentRoute] ?? 'Panel';
 ?>
 <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/home/header.css">
 <script src="<?= BASE_URL ?>/Assets/js/home/header.js"></script>
 
 <header class="topbar">
     <div class="topbar-title">
-        <h1>Dashboard</h1>
+        <h1><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></h1>
         <span class="topbar-subtitle">Panel</span>
     </div>
 

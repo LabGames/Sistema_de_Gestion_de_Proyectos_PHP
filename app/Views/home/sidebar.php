@@ -1,6 +1,7 @@
+<?php
+$currentRoute = $_SERVER['REQUEST_URI']; 
+?>
 <link rel="stylesheet" href="<?= BASE_URL ?>/Assets/styles/home/sidebar.css">
-
-
 <input type="checkbox" id="nav-toggle" />
 
 <aside class="sidebar">
@@ -23,7 +24,7 @@
     <div class="menu-sidebar">
         <div class="menu-sidebar-title">General</div>
 
-        <a href="<?= BASE_URL ?>/Home" class="sidebar-menu-item active">
+        <a href="<?= BASE_URL ?>/Home" class="sidebar-menu-item <?= strpos($currentRoute, '/Home') !== false ? 'active' : '' ?>">
             <i class="fa-solid fa-house"></i>
             <span class="sidebar-text">Dashboard</span>
         </a>
@@ -33,7 +34,7 @@
         </a>
 
         <?php if ($_SESSION["rol_id"] == 1): ?>
-            <a href="#" class="sidebar-menu-item">
+            <a href="#" class="sidebar-menu-item <?= strpos($currentRoute, '/Reportes') !== false ? 'active' : '' ?>">
                 <i class="fa-solid fa-chart-simple"></i>
                 <span class="sidebar-text">Reportes</span>
             </a>
@@ -41,11 +42,11 @@
         <div class="sidebar-separator"></div>
         <?php if ($_SESSION["rol_id"] == 1): ?>
             <div class="menu-sidebar-title">Configuración</div>
-            <a href="<?= BASE_URL ?>/Usuarios" class="sidebar-menu-item">
+            <a href="<?= BASE_URL ?>/Usuarios" class="sidebar-menu-item <?= strpos($currentRoute, '/Usuarios') !== false ? 'active' : '' ?>">
                 <i class="fa-solid fa-user"></i>
                 <span class="sidebar-text">Usuarios</span>
             </a>
-            <a href="<?= BASE_URL ?>/Clientes" class="sidebar-menu-item">
+            <a href="<?= BASE_URL ?>/Clientes" class="sidebar-menu-item <?= strpos($currentRoute, '/Clientes') !== false ? 'active' : '' ?>">
                 <i class="fa-solid fa-users"></i>
                 <span class="sidebar-text">Clientes</span>
             </a>

@@ -100,6 +100,9 @@ class Router
             case 'Registro':
                 $controller->index_registro();
                 break;
+            case 'Registro/Validacion':
+                $controller->registrar();
+                break;    
             //Sistema
             //Home
             case 'Home':

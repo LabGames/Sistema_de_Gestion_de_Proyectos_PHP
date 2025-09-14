@@ -64,14 +64,14 @@ function ActualizarDatos() {
       } else {
         let erroresHtml = "";
         if (Array.isArray(data.message)) {
-          erroresHtml = "<div><ul style='text-align:center'></div>";
-          data.message.forEach((errores) => {
-            erroresHtml += `<li>${errores}</li>`;
+          erroresHtml = "<ul style='text-align:center; padding:0;'>";
+          data.message.forEach((error) => {
+            erroresHtml += `<li style="list-style:none; margin:4px 0;">${error}</li>`;
           });
           erroresHtml += "</ul>";
         } else {
           erroresHtml = data.message;
-        }
+        } 
         Swal.fire({
           icon: "error",
           title: "Campos incompletos",
@@ -292,14 +292,14 @@ function registrarContacto() {
       } else {
         let erroresHtml = "";
         if (Array.isArray(data.message)) {
-          erroresHtml = "<div><ul style='text-align:center'></div>";
-          data.message.forEach((errores) => {
-            erroresHtml += `<li>${errores}</li>`;
+          erroresHtml = "<ul style='text-align:center; padding:0;'>";
+          data.message.forEach((error) => {
+            erroresHtml += `<li style="list-style:none; margin:4px 0;">${error}</li>`;
           });
           erroresHtml += "</ul>";
         } else {
           erroresHtml = data.message;
-        }
+        } 
         Swal.fire({
           icon: "error",
           title: "Campos incompletos",
@@ -356,14 +356,14 @@ function actualizarContacto() {
       } else {
         let erroresHtml = "";
         if (Array.isArray(data.message)) {
-          erroresHtml = "<div><ul style='text-align:center'></div>";
-          data.message.forEach((errores) => {
-            erroresHtml += `<li>${errores}</li>`;
+          erroresHtml = "<ul style='text-align:center; padding:0;'>";
+          data.message.forEach((error) => {
+            erroresHtml += `<li style="list-style:none; margin:4px 0;">${error}</li>`;
           });
           erroresHtml += "</ul>";
         } else {
           erroresHtml = data.message;
-        }
+        } 
         Swal.fire({
           icon: "error",
           title: "Campos incompletos",
