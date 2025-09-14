@@ -144,9 +144,6 @@ class ClientesController
         $contacto    = $_POST['contacto'] ?? null;
         $user_id    = $_POST['user_id'] ?? null;
 
-
-
-
         $errores = [];
         if (empty($id)) {
             $errores[] = "No se encontro el ID del cliente";

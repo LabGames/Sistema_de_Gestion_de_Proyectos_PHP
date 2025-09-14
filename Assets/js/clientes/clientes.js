@@ -78,7 +78,7 @@ function listarEstadosModal() {
     });
 }
 
-function sWizard() {
+function smartWizard() {
   $("#smartwizard").smartWizard({
     theme: "circles",
     autoAdjustHeight: false,
@@ -244,7 +244,7 @@ function editarCliente(id) {
 
       modal.classList.add("show");
     })
-    .catch((error) => console.error("Error al obtener usuario:", error));
+    .catch((error) => console.error("Error al obtener cliente:", error));
 }
 
 

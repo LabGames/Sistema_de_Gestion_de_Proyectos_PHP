@@ -18,7 +18,6 @@ class Clientes
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     public function findById($id)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM clientes WHERE id = :id");
@@ -85,5 +84,11 @@ class Clientes
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM clientes WHERE user_id = :user_id");
         $stmt->execute([':user_id' => $userId]);
         return $stmt->fetchColumn() > 0;
+    }
+
+    public function verificarContactoPrincipal($id){
+        $stmt = $this->pdo->prepare("SELECT * FROM clientes WHERE contacto_principal = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

@@ -40,13 +40,14 @@ class Router
         require_once __DIR__ . "/Controllers/HomeController.php";
         require_once __DIR__ . "/Controllers/UserController.php";
         require_once __DIR__ . "/Controllers/RolController.php";
-        require_once __DIR__ . "/Controllers/ProyectController.php";
-
         require_once __DIR__ . "/Controllers/ClientesController.php";
         require_once __DIR__ . "/Controllers/ContactosController.php";
+        require_once __DIR__ . "/Controllers/PerfilController.php";
+
+
+        require_once __DIR__ . "/Controllers/ProyectController.php";
         require_once __DIR__ . "/Controllers/GestorProyectosController.php";
         require_once __DIR__ . "/Controllers/GestorTareasController.php";
-
         require_once __DIR__ . "/Controllers/pruebaControles.php";
 
 
@@ -54,10 +55,12 @@ class Router
         $HomeController = new HomeController($this->pdo);
         $UserController = new UserController($this->pdo);
         $rolController = new RolController($this->pdo);
-        $ProyectController = new ProyectController($this->pdo);
-
         $clientesController = new ClientesController($this->pdo);
         $contactosController = new ContactosController($this->pdo);
+        $perfilController = new PerfilController($this->pdo);
+
+
+        $ProyectController = new ProyectController($this->pdo);
         $GestorProyectosController = new GestorProyectosController($this->pdo);
         $GestorTareasController = new GestorTareasController($this->pdo);
         $pruebaControles = new pruebaControles($this->pdo);
@@ -69,9 +72,11 @@ class Router
         }
 
         switch ($url) {
+            //Landing Page
             case '':
                 $controller->welcome();
                 break;
+            //Login y Registro
             case 'Login':
                 $controller->index();
                 break;
@@ -81,45 +86,18 @@ class Router
             case 'Registro':
                 $controller->index_registro();
                 break;
+            //Sistema
+            //Home
             case 'Home':
                 $HomeController->index();
-                break;
-            case 'Dash':
-                $controller->dash();
-                break;
-            case 'GestorProyectos':
-                $GestorProyectosController->index();
-                break;
-            case 'GestorTareas':
-                $GestorTareasController->index();
-                break;
-            case 'ColabGes':
-                $GestorColabController->index();
                 break;
             case 'Logout':
                 $controller->logout();
                 break;
-            case 'GestorTareas/Listar':
-                $GestorTareasController->listar();
+            case 'Dash':
+                $controller->dash();
                 break;
-            case 'GestorTareas/MisTareas':
-                $GestorTareasController->misTareas();
-                break;
-            case 'GestorTareas/Asignar':
-                $GestorTareasController->asignar();
-                break;
-            case 'GestorTareas/Completar':
-                $GestorTareasController->completar();
-                break;
-            case 'GestorTareas/AdminList':
-                $GestorTareasController->adminList();
-                break;
-            case 'GestorTareas/Crear':
-                $GestorTareasController->crear();
-                break;
-                case 'GestorTareas/Eliminar':
-                $GestorTareasController->eliminar();
-                break;
+            //Usuarios
             case 'Usuarios':
                 $UserController->index();
                 break;
@@ -144,6 +122,7 @@ class Router
             case 'Usuarios/Inhabilitar':
                 $UserController->inhabilitar();
                 break;
+            //Clientes
             case 'Clientes':
                 $clientesController->index();
                 break;
@@ -165,14 +144,60 @@ class Router
             case 'Clientes/Eliminar':
                 $clientesController->eliminar();
                 break;
-            case 'Contactos':
-                $contactosController->index();
+            //Perfil
+            case 'Perfil':
+                $perfilController->index();
                 break;
+            //Contactos
             case 'Contactos/Listar':
                 $contactosController->listar();
                 break;
+            case 'Contactos/ObtenerContacto':
+                $contactosController->obtenerContacto();
+                break;
+            case 'Contactos/Registrar':
+                $contactosController->registrar();
+                break;
+            case 'Contactos/Actualizar':
+                $contactosController->actualizar();
+                break;
+            case 'Contactos/Eliminar':
+                $contactosController->eliminar();
+                break;
+            //Roles
             case 'Rol/Listar':
                 $rolController->listar();
+                break;
+            //Gestion de Proyectos
+            case 'GestorProyectos':
+                $GestorProyectosController->index();
+                break;
+            case 'GestorTareas':
+                $GestorTareasController->index();
+                break;
+            case 'ColabGes':
+                $GestorColabController->index();
+                break;
+            case 'GestorTareas/Listar':
+                $GestorTareasController->listar();
+                break;
+            case 'GestorTareas/MisTareas':
+                $GestorTareasController->misTareas();
+                break;
+            case 'GestorTareas/Asignar':
+                $GestorTareasController->asignar();
+                break;
+            case 'GestorTareas/Completar':
+                $GestorTareasController->completar();
+                break;
+            case 'GestorTareas/AdminList':
+                $GestorTareasController->adminList();
+                break;
+            case 'GestorTareas/Crear':
+                $GestorTareasController->crear();
+                break;
+            case 'GestorTareas/Eliminar':
+                $GestorTareasController->eliminar();
                 break;
             case 'Home/Proyectos/Crear-Nuevo-Proyecto':
                 $ProyectController->new_proyect();

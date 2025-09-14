@@ -126,7 +126,7 @@
 
     <div class="form-container">
         <div class="tabs">
-            <div class="tab active" onclick="showTab('empresa', event)">Perfil de Empresa</div>
+            <div class="tab active" onclick="showTab('empresa', event)">Perfil</div>
             <div class="tab" onclick="showTab('contactos', event)">Contactos</div>
         </div>
 
