@@ -4,7 +4,6 @@ class Router
     private $pdo;
     private $publicRoutes = ['Login', 'Registro', ''];
 
-
     private $privateRoutes = [
         'Home',
         'Logout',
@@ -22,6 +21,10 @@ class Router
         'Panel/GestorProyectos',
     ];
 
+    private $adminRoutes = [
+        'Usuarios',
+    ];
+
 
     public function __construct($pdo)
     {
@@ -32,6 +35,11 @@ class Router
     private function isAuthenticated(): bool
     {
         return !empty($_SESSION['user_id']);
+    }
+
+    private function isAdmin(): bool
+    {
+        return isset($_SESSION['rol_id']) && $_SESSION['rol_id'] == 1;
     }
 
     public function dispatch($url)
@@ -68,6 +76,12 @@ class Router
 
         if (in_array($url, $this->privateRoutes) && !$this->isAuthenticated()) {
             header("Location: " . BASE_URL . "/Login");
+            exit;
+        }
+
+        if (in_array($url, $this->adminRoutes) && !$this->isAdmin()) {
+            header("HTTP/1.1 403 Forbidden");
+            echo "403 - No tienes permisos para acceder a esta página";
             exit;
         }
 

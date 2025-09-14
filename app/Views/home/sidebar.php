@@ -20,7 +20,6 @@
         </label>
     </div>
 
-
     <div class="menu-sidebar">
         <div class="menu-sidebar-title">General</div>
 
@@ -28,32 +27,30 @@
             <i class="fa-solid fa-house"></i>
             <span class="sidebar-text">Dashboard</span>
         </a>
-
         <a href="<?= BASE_URL ?>/Home/Proyectos" class="sidebar-menu-item">
             <i class="fa-solid fa-list"></i>
             <span class="sidebar-text">Proyectos</span>
         </a>
 
-        <a href="#" class="sidebar-menu-item">
-            <i class="fa-solid fa-chart-simple"></i>
-            <span class="sidebar-text">Reportes</span>
-        </a>
-
+        <?php if ($_SESSION["rol_id"] == 1): ?>
+            <a href="#" class="sidebar-menu-item">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span class="sidebar-text">Reportes</span>
+            </a>
+        <?php endif; ?>
         <div class="sidebar-separator"></div>
-
-        <div class="menu-sidebar-title">Configuracion</div>
-        <a href="<?= BASE_URL ?>/Usuarios" class="sidebar-menu-item">
-            <i class="fa-solid fa-user"></i>
-            <span class="sidebar-text">Usuarios</span>
-        </a>
-        <a href="<?= BASE_URL ?>/Clientes" class="sidebar-menu-item">
-        <i class="fa-solid fa-users"></i>
-            <span class="sidebar-text">Clientes</span>
-        </a>
-        <a href="#" class="sidebar-menu-item">
-            <i class="fa-solid fa-gear"></i>
-            <span class="sidebar-text">Ajustes</span>
-        </a>
+        <?php if ($_SESSION["rol_id"] == 1): ?>
+            <div class="menu-sidebar-title">Configuración</div>
+            <a href="<?= BASE_URL ?>/Usuarios" class="sidebar-menu-item">
+                <i class="fa-solid fa-user"></i>
+                <span class="sidebar-text">Usuarios</span>
+            </a>
+            <a href="<?= BASE_URL ?>/Clientes" class="sidebar-menu-item">
+                <i class="fa-solid fa-users"></i>
+                <span class="sidebar-text">Clientes</span>
+            </a>
+        <?php endif; ?>
+        
     </div>
 
     <div class="sidebar-footer">

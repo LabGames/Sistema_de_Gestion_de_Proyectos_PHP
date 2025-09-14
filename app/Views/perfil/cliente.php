@@ -7,7 +7,7 @@
         <div class="tab" onclick="showTab('contactos', event)">Contactos</div>
     </div>
 
-    <div id="empresa" class="tab-content active">
+    <div id="empresa" class="tab-content-perfil active">
         <h2>Datos</h2>
         <form id="formActualizarDatosCliente">
             <div class="form-group">
@@ -28,7 +28,7 @@
         </form>
     </div>
 
-    <div id="contactos" class="tab-content">
+    <div id="contactos" class="tab-content-perfil">
         <div class="table-head">
             <h2>Contactos</h2>
             <button class="table-button-head" onclick="nuevoContacto()"><i class="fa-solid fa-phone"></i> Nuevo</button>

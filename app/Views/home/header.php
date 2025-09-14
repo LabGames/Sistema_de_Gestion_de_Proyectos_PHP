@@ -29,11 +29,6 @@ $nombre = $_SESSION['name'] ?? 'Usuario';
                         <i class="fa-regular fa-user"></i> Mi perfil
                     </a>
                 </li>
-                <li>
-                    <a href="<?= BASE_URL ?>/Configuracion">
-                        <i class="fa-solid fa-gear"></i> Configuración
-                    </a>
-                </li>
                 <li class="theme-toggle">
                     <button id="themeToggleBtn" onclick="cambiarModo()">
                         <i class="fa-solid fa-moon"></i>
@@ -41,7 +36,7 @@ $nombre = $_SESSION['name'] ?? 'Usuario';
                     </button>
                 </li>
                 <li>
-                    <a href="<?= BASE_URL ?>/Logout">
+                    <a onclick="logout()">
                         <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
                     </a>
                 </li>
