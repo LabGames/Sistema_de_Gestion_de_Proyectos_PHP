@@ -85,6 +85,62 @@ class AuthController
         }
     }
 
+    public function registrar()
+    {
+        $name     = $_POST['name'] ?? null;
+        $rol      = $_POST['rol'] ?? null;
+        $email    = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
+        $password_hash = $_POST['password_hash'] ?? null;
+        $estado   = 0;
+
+        $errores = [];
+
+        if (empty($name)) {
+            $errores[] = "El nombre es obligatorio";
+        }
+        if (empty($rol)) {
+            $errores[] = "El rol es obligatorio";
+        }
+        if (empty($email)) {
+            $errores[] = "El correo es obligatorio";
+        }
+        if (empty($password)) {
+            $errores[] = "La contraseña es obligatoria";
+        }
+        if ($password != $password_hash) {
+            $errores[] = "La contraseñas no coinciden";
+        }
+        $userVerify = $this->user->findByEmail($email);
+        if ($userVerify) {
+            $errores[] = "Este correo ya esta registrado";
+        }
+
+        if (!empty($errores)) {
+            echo json_encode([
+                "success" => false,
+                "message" => $errores
+            ]);
+            return;
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $resultado = $this->user->create($name, $rol, $email, $hashedPassword, $estado);
+
+        if ($resultado) {
+            echo json_encode([
+                "success" => true,
+                "message" => "Registro realizado correctamente",
+                "redirect" => BASE_URL . "/Login"
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => ["Error al registrar usuario"]
+            ]);
+        }
+    }
+
     public function logout()
     {
         session_destroy();

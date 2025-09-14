@@ -5,7 +5,7 @@
         <div class="tab active" >Perfil</div>
     </div>
 
-    <div class="tab-content active">
+    <div class="tab-content-perfil active">
         <h2>Datos</h2>
         <form id="formActualizarDatosUsuario">
             <div class="form-group">

@@ -30,7 +30,7 @@
                     <input
                         type="text"
                         placeholder="Tu nombre"
-                        id="name"/>
+                        id="nombre" />
                 </div>
             </div>
 

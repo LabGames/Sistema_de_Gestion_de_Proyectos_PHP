@@ -192,7 +192,7 @@ input:checked + .slider:before {
   color: #fff;
 }
 
-.tab-content {
+.tab-content-perfil {
   display: none;
   background: #1e293b;
   padding: 25px;
@@ -202,7 +202,7 @@ input:checked + .slider:before {
   border: 1px solid #334155;
 }
 
-.tab-content.active {
+.tab-content-perfil.active {
   display: block;
 }
 
