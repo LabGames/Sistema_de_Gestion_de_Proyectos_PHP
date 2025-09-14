@@ -122,6 +122,9 @@ class Router
             case 'Usuarios/Inhabilitar':
                 $UserController->inhabilitar();
                 break;
+            case 'Usuarios/ActualizarDatos':
+                $UserController->actualizarDatos();
+                break;
             //Clientes
             case 'Clientes':
                 $clientesController->index();
@@ -143,6 +146,12 @@ class Router
                 break;
             case 'Clientes/Eliminar':
                 $clientesController->eliminar();
+                break;
+            case 'Clientes/AsignarContactoPrincipal':
+                $clientesController->asignarContactoPrincipal();
+                break;
+            case 'Clientes/ActualizarDatos':
+                $clientesController->actualizarDatos();
                 break;
             //Perfil
             case 'Perfil':

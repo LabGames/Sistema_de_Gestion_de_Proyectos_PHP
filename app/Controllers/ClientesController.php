@@ -224,4 +224,77 @@ class ClientesController
             ]);
         }
     }
+
+    public function asignarContactoPrincipal()
+    {
+        $idContacto = $_POST['id'] ?? null;
+        $idCliente = $_SESSION["cliente_id"];
+
+        if (!$idContacto) {
+            echo json_encode([
+                "success" => false,
+                "message" => "ID no recibido"
+            ]);
+            return;
+        }
+        
+        $resultado = $this->clientes->asignarContactoPrincipal($idContacto,$idCliente);
+
+        if ($resultado) {
+            echo json_encode([
+                "success" => true,
+                "message" => "El contacto fue asignado correctamente como principal."
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => "No se pudo eliminar el usuario"
+            ]);
+        }
+    }
+
+    public function actualizarDatos()
+    {
+        $id = $_SESSION["cliente_id"];
+        $nombreCliente     = $_POST['nombreCliente'] ?? null;
+        $empresa      = $_POST['empresa'] ?? null;
+        $rubro    = $_POST['rubro'] ?? null;
+
+        $errores = [];
+        if (empty($id)) {
+            $errores[] = "No se encontro el ID del cliente";
+        }
+        if (empty($nombreCliente)) {
+            $errores[] = "El nombre del cliente es obligatorio";
+        }
+        if (empty($empresa)) {
+            $errores[] = "El nombre de la empresa es obligatorio";
+        }
+        if (empty($rubro)) {
+            $errores[] = "El rubro de la empresa es obligatorio";
+        }
+
+        if (!empty($errores)) {
+            echo json_encode([
+                "success" => false,
+                "message" => $errores
+            ]);
+            return;
+        }
+
+        $resultado = $this->clientes->updateDatos($id, $nombreCliente, $empresa, $rubro);
+
+
+        if ($resultado) {
+            echo json_encode([
+                "success" => true,
+                "message" => "Datos actualizados"
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => ["Error al actualizar datos"]
+            ]);
+        }
+    }
 }

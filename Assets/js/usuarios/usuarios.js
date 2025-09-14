@@ -196,25 +196,7 @@ function actualizarUsuario() {
   const rol = document.getElementById("rol_modal").value.trim();
   const email = document.getElementById("correo_modal").value.trim();
   const password = document.getElementById("password_modal").value.trim();
-
-  if (!id || !name || !rol || !email) {
-    Swal.fire({
-      icon: "warning",
-      title: "Campos incompletos",
-      text: "Todos los campos son obligatorios.",
-      background: "#1e293b",
-      color: "#e2e8f0",
-      iconColor: "#facc15",
-      confirmButtonColor: "#6366f1",
-      customClass: {
-        title: "swal-title",
-        popup: "swal-popup",
-        confirmButton: "swal-confirm",
-      },
-    });
-    return;
-  }
-
+  
   const formData = new FormData();
   formData.append("id", id);
   formData.append("name", name);
@@ -238,26 +220,40 @@ function actualizarUsuario() {
           color: "#e2e8f0",
           iconColor: "#22c55e",
           confirmButtonColor: "#6366f1",
-          customClass: {
-            title: "swal-title",
-            popup: "swal-popup",
-            confirmButton: "swal-confirm",
-          },
         }).then(() => {
           document.getElementById("formActualizarUsuario").reset();
           listar();
         });
       } else {
-        console.log("Error: " + data.message);
+        let erroresHtml = "";
+        if (Array.isArray(data.message)) {
+          erroresHtml = "<div><ul style='text-align:center'></div>";
+          data.message.forEach((errores) => {
+            erroresHtml += `<li>${errores}</li>`;
+          });
+          erroresHtml += "</ul>";
+        } else {
+          erroresHtml = data.message;
+        }
         Swal.fire({
           icon: "error",
-          title: "Error de servidor",
-          text: "Hubo un problema al registrar el usuario.",
+          title: "Campos incompletos",
+          html: erroresHtml,
+          background: "#1e293b",
+          color: "#e2e8f0",
           confirmButtonColor: "#ef4444",
         });
       }
     })
-    .catch((error) => console.error("Error al actualizar usuario:", error));
+    .catch((error) => {
+      console.error("Error al actualizar usuario:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error de servidor",
+        text: "Hubo un problema al registrar el usuario.",
+        confirmButtonColor: "#ef4444",
+      });
+    });
 }
 
 function eliminarUsuario(id) {

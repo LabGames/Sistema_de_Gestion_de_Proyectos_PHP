@@ -16,12 +16,21 @@ class Contactos
 
     public function getByClienteId($cliente_id)
     {
-        $sql = "SELECT * FROM contactos WHERE cliente_id = :cliente_id";
+        $sql = "
+            SELECT c.*,
+                CASE 
+                    WHEN c.id = cli.contacto_principal THEN true
+                    ELSE false
+                END AS contacto_principal
+            FROM contactos c
+            INNER JOIN clientes cli ON cli.id = c.cliente_id
+            WHERE c.cliente_id = :cliente_id
+        ";
+
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':cliente_id' => $cliente_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
     public function findById($id)
     {

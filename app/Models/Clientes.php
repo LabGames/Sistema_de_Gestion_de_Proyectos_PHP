@@ -91,4 +91,36 @@ class Clientes
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function asignarContactoPrincipal($idContacto,$idCliente)
+    {
+
+        $sql = "UPDATE clientes 
+                   SET contacto_principal = :contacto_principal
+                 WHERE id = :id";
+        $params = [
+            ':id'       => $idCliente,
+            ':contacto_principal'    => $idContacto,
+        ];
+
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($params);
+    }
+
+    public function updateDatos($id, $nombre, $empresa, $rubro)
+    {
+
+        $sql = "UPDATE clientes 
+                   SET nombre_cliente = :nombre_cliente, empresa = :empresa, rubro = :rubro
+                 WHERE id = :id";
+        $params = [
+            ':id'       => $id,
+            ':nombre_cliente'   => $nombre,
+            ':empresa'   => $empresa,
+            ':rubro'      => $rubro,
+        ];
+
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($params);
+    }
 }

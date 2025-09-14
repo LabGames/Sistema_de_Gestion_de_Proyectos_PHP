@@ -126,6 +126,54 @@ class UserController
         }
     }
 
+    public function actualizarDatos()
+    {
+        $id       = $_SESSION["user_id"];
+        $name     = $_POST['name'] ?? null;
+        $email    = $_POST['email'] ?? null;
+        $rol      = $_SESSION["rol_id"];
+        $password = $_POST['password'] ?? null;
+        $errores = [];
+
+        if (empty($name)) {
+            $errores[] = "El nombre es obligatorio";
+        }
+        if (empty($email)) {
+            $errores[] = "El correo es obligatorio";
+        }
+        if(!empty($password) && $password < 8){
+            $errores[] = "La contraseña debe tener minimo 8 digitos";
+        }
+
+
+        if (!empty($errores)) {
+            echo json_encode([
+                "success" => false,
+                "message" => $errores
+            ]);
+            return;
+        }
+
+        $hashedPassword = null;
+        if (!empty($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        }
+
+        $resultado = $this->user->update($id, $name, $rol, $email, $hashedPassword);
+
+        if ($resultado) {
+            echo json_encode([
+                "success" => true,
+                "message" => "Datos actualizados correctamente"
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => "Error al actualizar datos"
+            ]);
+        }
+    }
+
     public function eliminar()
     {
         $id = $_POST['id'] ?? null;

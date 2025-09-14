@@ -1,6 +1,5 @@
 $(document).ready(function () {
   listar();
-  listarContactos();
   datosCliente();
 });
 let tabla;
@@ -26,7 +25,6 @@ function datosCliente() {
   })
     .then((response) => response.json())
     .then((cliente) => {
-      console.log(cliente)
       document.getElementById("nombre_cliente").value = cliente.nombre_cliente;
       document.getElementById("empresa_cliente").value = cliente.empresa;
       document.getElementById("rubro_cliente").value = cliente.rubro;
@@ -34,28 +32,64 @@ function datosCliente() {
     .catch((error) => console.error("Error al obtener cliente:", error));
 }
 
-function listarContactos() {
-  const formData = new FormData();
-  formData.append("id", clienteId);
+function ActualizarDatos() {
+  const nombreCliente = document.getElementById("nombre_cliente").value.trim();
+  const empresa = document.getElementById("empresa_cliente").value.trim();
+  const rubro = document.getElementById("rubro_cliente").value.trim();
 
-  fetch(`${BASE_URL}/Contactos/Listar`, {
+  const formData = new FormData();
+  formData.append("nombreCliente", nombreCliente);
+  formData.append("empresa", empresa);
+  formData.append("rubro", rubro);
+
+  fetch(`${BASE_URL}/Clientes/ActualizarDatos`, {
     method: "POST",
     body: formData,
   })
     .then((response) => response.json())
-    .then((contactos) => {
-      const select = document.getElementById("contacto_cliente");
-      select.innerHTML = "";
-
-      contactos.forEach((c) => {
-        const option = document.createElement("option");
-        option.value = c.id;
-        option.textContent = c.nombre;
-        select.appendChild(option);
-      });
+    .then((data) => {
+      if (data.success) {
+        Swal.fire({
+          icon: "success",
+          title: data.message,
+          text: "Los datos fueron actualizados correctamente.",
+          background: "#1e293b",
+          color: "#e2e8f0",
+          iconColor: "#22c55e",
+          confirmButtonColor: "#6366f1",
+        }).then(() => {
+          document.getElementById("formActualizarDatosCliente").reset();
+          datosCliente();
+        });
+      } else {
+        let erroresHtml = "";
+        if (Array.isArray(data.message)) {
+          erroresHtml = "<div><ul style='text-align:center'></div>";
+          data.message.forEach((errores) => {
+            erroresHtml += `<li>${errores}</li>`;
+          });
+          erroresHtml += "</ul>";
+        } else {
+          erroresHtml = data.message;
+        }
+        Swal.fire({
+          icon: "error",
+          title: "Campos incompletos",
+          html: erroresHtml,
+          background: "#1e293b",
+          color: "#e2e8f0",
+          confirmButtonColor: "#ef4444",
+        });
+      }
     })
     .catch((error) => {
-      console.error("Error al cargar contactos:", error);
+      console.error("Error al actualizar los datos:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error de servidor",
+        text: "Hubo un problema al actualizar los datos.",
+        confirmButtonColor: "#ef4444",
+      });
     });
 }
 
@@ -82,6 +116,7 @@ function listar() {
   fetch(`${BASE_URL}/Contactos/Listar`, { method: "POST", body: formData })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       if (tabla) {
         tabla.clear();
         tabla.rows.add(data);
@@ -92,22 +127,37 @@ function listar() {
           lengthMenu: [5, 10, 25, 50],
           data: data,
           columns: [
-            { data: "nombre" },
-            { data: "correo" },
             {
-              data: "telefono",
+              data: "nombre",
+              render: function (data, type, row) {
+                if (row.contacto_principal == 1) {
+                  return `${data} <span style="margin-left:10px" class="badge badge-primary">Principal</span>`;
+                }
+                return data;
+              },
             },
+            { data: "correo" },
+            { data: "telefono" },
             {
               data: null,
               render: function (row) {
-                return `
-                      <button title="Editar" class="btn-accion btn-editar" onclick="editarContacto(${row.id})">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                      </button>
-                      <button title="Eliminar" class="btn-accion btn-eliminar" onclick="eliminarContacto(${row.id})">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    `;
+                let buttons = `
+                  <button title="Editar" class="btn-accion btn-editar" onclick="editarContacto(${row.id})">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button title="Eliminar" class="btn-accion btn-eliminar" onclick="eliminarContacto(${row.id})">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                `;
+                if (row.contacto_principal == 0) {
+                  buttons += `
+                    <button title="Asignar como principal" class="btn-accion btn-extra" onclick="asignarPrincipal(${row.id})">
+                      <i class="fa-solid fa-crown"></i>
+                    </button>
+                  `;
+                }
+
+                return buttons;
               },
             },
           ],
@@ -120,6 +170,7 @@ function listar() {
     })
     .catch((error) => console.error("Error al cargar contactos:", error));
 }
+
 
 function editarContacto(id) {
   const modal = document.getElementById("contactoModal");
@@ -141,6 +192,72 @@ function editarContacto(id) {
     })
     .catch((error) => console.error("Error al obtener contacto:", error));
 }
+
+function asignarPrincipal(id) {
+  Swal.fire({
+    title: "¿Estás seguro?",
+    text: "Este contacto será asignado como el contacto principal.",
+    icon: "warning",
+    background: "#1e293b",
+    color: "#e2e8f0",
+    iconColor: "#facc15",
+    showCancelButton: true,
+    confirmButtonText: "Sí, asignar",
+    cancelButtonText: "Cancelar",
+    customClass: {
+      popup: "swal-popup",
+      title: "swal-title",
+      htmlContainer: "swal-text",
+      confirmButton: "swal-confirm",
+      cancelButton: "swal-cancel",
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const formData = new FormData();
+      formData.append("id", id);
+
+      fetch(`${BASE_URL}/Clientes/AsignarContactoPrincipal`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            Swal.fire({
+              icon: "success",
+              title: "Contacto principal actualizado",
+              text: data.message || "El contacto fue asignado correctamente como principal.",
+              background: "#1e293b",
+              color: "#e2e8f0",
+              confirmButtonColor: "#6366f1",
+            });
+            listar();
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: data.message || "No se pudo asignar el contacto como principal.",
+              background: "#1e293b",
+              color: "#e2e8f0",
+              confirmButtonColor: "#ef4444",
+            });
+          }
+        })
+        .catch((err) => {
+          console.error("Error al asignar contacto principal:", err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un problema en el servidor.",
+            background: "#1e293b",
+            color: "#e2e8f0",
+            confirmButtonColor: "#ef4444",
+          });
+        });
+    }
+  });
+}
+
 
 function registrarContacto() {
   const nombre = document.getElementById("nombre").value.trim();
