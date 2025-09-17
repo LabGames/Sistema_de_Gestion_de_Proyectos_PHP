@@ -9,13 +9,13 @@
                 <th colspan ="6">
                     <input type="text" id="search_proyect" placeholder="Buscar">
                     <select name="filter_state" id="filter_state">
-                        <option value="">-- Estado --</option>
+                        <option value="">Filtrar por Estado</option>
                         <?php foreach ($estados_value as $estado): ?>
                             <option value="<?= htmlspecialchars($estado['nombre']) ?>"><?= htmlspecialchars($estado['nombre']) ?></option>
                         <?php endforeach; ?>
                     </select>
                     <select name="state" id="filter_date">
-                        <option value="">-- Fecha inicio --</option>
+                        <option value="">Filtrar por Fecha</option>
                         <?php foreach ($proyectos as $proyecto): ?>
                             <option value="<?= htmlspecialchars($proyecto['fecha_inicio']) ?>"><?= htmlspecialchars($proyecto['fecha_inicio']) ?></option>
                         <?php endforeach; ?>
