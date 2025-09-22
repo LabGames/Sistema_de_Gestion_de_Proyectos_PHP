@@ -249,6 +249,10 @@ class Router
             case 'Panel/GestorProyectos':
                 $pruebaControles->index();
                 break;
+            //Rutas de prueba
+            case 'Prueba':
+                $ProyectController->prueba();
+                break;
             default:
                 echo "404 - Página no encontrada";
         }

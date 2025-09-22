@@ -61,6 +61,16 @@ class ProyectController
         include __DIR__ . "/../Views/new_proyect.php";
     }
 
+    public function prueba()
+    {
+        $proyectos_value = $this->estados->getAll();
+        $tipos_value = $this->tipos->getAll();
+        $estados_value = $this->estados->getAll();
+        $clientes_value = $this->clientes->getAll();
+        
+        include __DIR__ . "/../Views/proyects/new_proyect.php";
+    }
+
     public function listarProyectos()
     {
         $proyectos_value = $this->proyectos->getAll();
